@@ -1,6 +1,7 @@
 package hello.mong.controller;
 
-import hello.mong.domain.request.CreateMemberForm;
+import hello.mong.domain.request.CreateMemberRequest;
+import hello.mong.domain.request.LoginMemberRequest;
 import hello.mong.domain.response.LoginMemberResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.service.MemberService;
@@ -21,14 +22,22 @@ public class MainController {
     private final MemberService memberService;
 
     @PostMapping("/member/new")
-    public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody CreateMemberForm createMemberForm) {
-        SignUpMemberResponse signUpMemberResponse = memberService.signUp(createMemberForm);
+    public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody CreateMemberRequest createMemberRequest) {
+        SignUpMemberResponse signUpMemberResponse = memberService.signUp(createMemberRequest);
 
         return new ResponseEntity<>(signUpMemberResponse, HttpStatus.OK);
     }
 
     @PostMapping("/member/login")
-    public ResponseEntity<LoginMemberResponse> loginMember() {
-        return new ResponseEntity<>(new LoginMemberResponse(), HttpStatus.OK);
+    public ResponseEntity<LoginMemberResponse> loginMember(@Valid @RequestBody LoginMemberRequest request) {
+
+        String token = memberService.login(request);
+
+        return new ResponseEntity<>(new LoginMemberResponse("로그인에 성공하였습니다.",request.getEmail(),token), HttpStatus.OK);
+    }
+
+    @PostMapping("/user/test")
+    public String test() {
+        return "Hello";
     }
 }

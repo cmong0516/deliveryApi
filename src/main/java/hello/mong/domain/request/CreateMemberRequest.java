@@ -3,7 +3,7 @@ package hello.mong.domain.request;
 import lombok.Data;
 
 @Data
-public class CreateMemberForm {
+public class CreateMemberRequest {
 
     private String email;
     private String name;
