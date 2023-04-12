@@ -42,9 +42,9 @@ public class MainController {
     @PostMapping("/user/test")
     public String test(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
+        String substring = authorization.split(" ")[1].trim();
+        String member = jwtProvider.getMember(substring);
 
-        log.info("authorization = {}",authorization);
-
-        return "Hello";
+        return member + " 님이 성공적으로 로그인 되었습니다.";
     }
 }

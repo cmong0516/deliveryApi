@@ -71,7 +71,7 @@ public class JwtProvider {
     }
 
     public String getMember(String token) {
-        log.info("-> JwtProvider.getMember()");
+        log.info("-> JwtProvider.getMember()  token = {}", token);
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
     }
 

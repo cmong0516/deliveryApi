@@ -1,5 +1,8 @@
 package hello.mong.domain.response;
 
+import hello.mong.domain.entity.Authority;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 @Data
