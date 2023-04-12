@@ -3,6 +3,7 @@ package hello.mong.utils;
 import hello.mong.domain.entity.Authority;
 import hello.mong.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -31,7 +32,7 @@ public class JwtProvider {
 
     private Key key;
 
-    private final long exp = 1000L * 60 * 60;
+    private final long exp = 1000L * 60;
 
     private final CustomUserDetailsService customUserDetailsService;
 
@@ -42,13 +43,13 @@ public class JwtProvider {
 
     public String createToken(String username, List<Authority> roles) {
         log.info("-> JwtProvider.createToken");
-        log.info("JwtProvider.createToken() username = {}",username);
-        log.info("JwtProvider.createToken() role = {}",roles.toString());
+        log.info("JwtProvider.createToken() username = {}", username);
+        log.info("JwtProvider.createToken() role = {}", roles.toString());
 
         // username , role 을 받아 토큰 생성
         Claims claims = Jwts.claims().setSubject(username);
         // jjwt library 를 사용하여 claims 를 생성하고 setSubject(username)
-        claims.put("roles",roles);
+        claims.put("roles", roles);
         // 생성한 클래임에 키 "role" 값 role 설정.
         Date now = new Date();
 
@@ -72,6 +73,15 @@ public class JwtProvider {
 
     public String getMember(String token) {
         log.info("-> JwtProvider.getMember()  token = {}", token);
+
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+            return e.getClaims().getSubject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -82,7 +92,7 @@ public class JwtProvider {
     }
 
     public boolean validateToken(String token) {
-        log.info("JwtProvider.validateToken() token = {}",token);
+        log.info("JwtProvider.validateToken() token = {}", token);
 
         try {
             if (!token.substring(0, "BEARER ".length()).equalsIgnoreCase("BEARER ")) {
@@ -90,8 +100,8 @@ public class JwtProvider {
             } else {
                 token = token.split(" ")[1].trim();
             }
-
             Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+
             return !claimsJws.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             return false;

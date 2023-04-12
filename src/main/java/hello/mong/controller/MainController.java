@@ -1,8 +1,9 @@
 package hello.mong.controller;
 
-import hello.mong.domain.request.CreateMemberRequest;
+import hello.mong.domain.request.NewMemberRequest;
 import hello.mong.domain.request.LoginMemberRequest;
 import hello.mong.domain.response.LoginMemberResponse;
+import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
@@ -25,8 +26,8 @@ public class MainController {
     private final JwtProvider jwtProvider;
 
     @PostMapping("/member/new")
-    public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody CreateMemberRequest createMemberRequest) {
-        SignUpMemberResponse signUpMemberResponse = memberService.signUp(createMemberRequest);
+    public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody NewMemberRequest newMemberRequest) {
+        SignUpMemberResponse signUpMemberResponse = memberService.signUp(newMemberRequest);
 
         return new ResponseEntity<>(signUpMemberResponse, HttpStatus.OK);
     }
@@ -36,15 +37,20 @@ public class MainController {
 
         String token = memberService.login(request);
 
-        return new ResponseEntity<>(new LoginMemberResponse("로그인에 성공하였습니다.",request.getEmail(),token), HttpStatus.OK);
+        return new ResponseEntity<>(new LoginMemberResponse("로그인에 성공하였습니다.", request.getEmail(), token), HttpStatus.OK);
     }
 
-    @PostMapping("/user/test")
+    @PostMapping("/member/test")
     public String test(HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
         String substring = authorization.split(" ")[1].trim();
         String member = jwtProvider.getMember(substring);
 
         return member + " 님이 성공적으로 로그인 되었습니다.";
+    }
+
+    @PostMapping("/delivery/new")
+    public ResponseEntity<NewDeliveryResponse> newDelivery() {
+        return null;
     }
 }

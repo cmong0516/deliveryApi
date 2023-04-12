@@ -1,4 +1,4 @@
-package hello.mong.repository;
+package hello.mong.repository.member;
 
 import org.springframework.stereotype.Repository;
 

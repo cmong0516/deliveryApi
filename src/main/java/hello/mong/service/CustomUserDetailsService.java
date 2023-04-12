@@ -1,7 +1,7 @@
 package hello.mong.service;
 
 import hello.mong.domain.entity.Member;
-import hello.mong.repository.MemberJpaRepository;
+import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.utils.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

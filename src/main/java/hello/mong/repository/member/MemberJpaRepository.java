@@ -1,4 +1,4 @@
-package hello.mong.repository;
+package hello.mong.repository.member;
 
 import hello.mong.domain.entity.Member;
 import java.util.Optional;
