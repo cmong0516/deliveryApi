@@ -53,6 +53,6 @@ public class MemberService {
             throw new IllegalArgumentException("로그인 정보가 일치하지 않습니다.");
         }
 
-        return null;
+        return jwtProvider.createToken(member.getEmail(),member.getRoles());
     }
 }

@@ -1,6 +1,7 @@
 package hello.mong.utils;
 
 import hello.mong.domain.Role;
+import hello.mong.domain.entity.Authority;
 import hello.mong.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -10,6 +11,7 @@ import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -39,15 +41,15 @@ public class JwtProvider {
         key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createToken(String username, Role role) {
+    public String createToken(String username, List<Authority> roles) {
         log.info("-> JwtProvider.createToken");
         log.info("JwtProvider.createToken() username = {}",username);
-        log.info("JwtProvider.createToken() role = {}",role.name());
+        log.info("JwtProvider.createToken() role = {}",roles.toString());
 
         // username , role 을 받아 토큰 생성
         Claims claims = Jwts.claims().setSubject(username);
         // jjwt library 를 사용하여 claims 를 생성하고 setSubject(username)
-        claims.put("role",role);
+        claims.put("roles",roles);
         // 생성한 클래임에 키 "role" 값 role 설정.
         Date now = new Date();
 
