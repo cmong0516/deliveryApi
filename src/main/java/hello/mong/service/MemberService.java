@@ -1,6 +1,7 @@
 package hello.mong.service;
 
 import hello.mong.domain.Role;
+import hello.mong.domain.entity.Authority;
 import hello.mong.domain.request.CreateMemberRequest;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.request.LoginMemberRequest;
@@ -8,6 +9,7 @@ import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.repository.MemberJpaRepository;
 import hello.mong.repository.MemberRepositoryCustom;
 import hello.mong.utils.JwtProvider;
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,12 +36,13 @@ public class MemberService {
                 .email(createMemberRequest.getEmail())
                 .name(createMemberRequest.getName())
                 .password(passwordEncoder.encode(createMemberRequest.getPassword()))
-                .role(Role.USER)
                 .build();
+
+        member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
 
         memberJpaRepository.save(member);
 
-        return new SignUpMemberResponse(member.getEmail(), member.getName(),member.getRole(),member.getCreateDate());
+        return new SignUpMemberResponse(member.getEmail(),member.getName(),member.getRoles(),member.getCreateDate());
     }
 
     public String login(LoginMemberRequest request) {
@@ -50,6 +53,6 @@ public class MemberService {
             throw new IllegalArgumentException("로그인 정보가 일치하지 않습니다.");
         }
 
-        return jwtProvider.createToken(member.getEmail(), member.getRole());
+        return null;
     }
 }

@@ -2,10 +2,16 @@ package hello.mong.domain.entity;
 
 import hello.mong.auditing.BaseTimeEntity;
 import hello.mong.domain.Role;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +19,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Member extends BaseTimeEntity {
 
     @Id
@@ -22,14 +30,19 @@ public class Member extends BaseTimeEntity {
     private String email;
     private String name;
     private String password;
-    private Role role;
+
+    private String refreshToken;
 
 
-    @Builder
-    public Member(String email, String name, String password, Role role) {
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.role = role;
+    @OneToMany(mappedBy = "member",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Authority> roles = new ArrayList<>();
+
+    public void setRoles(List<Authority> role) {
+        this.roles = role;
+        role.forEach(o -> o.setMember(this));
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

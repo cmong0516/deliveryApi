@@ -1,9 +1,8 @@
 package hello.mong.utils;
 
 import hello.mong.domain.entity.Member;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,10 +21,8 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority(member.getRole().name()));
-
-        return list;
+        return member.getRoles().stream().map(o -> new SimpleGrantedAuthority(o.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
