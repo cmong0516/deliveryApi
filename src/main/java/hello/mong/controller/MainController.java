@@ -5,6 +5,8 @@ import hello.mong.domain.request.LoginMemberRequest;
 import hello.mong.domain.response.LoginMemberResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.service.MemberService;
+import hello.mong.utils.JwtProvider;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     private final MemberService memberService;
+    private final JwtProvider jwtProvider;
 
     @PostMapping("/member/new")
     public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody CreateMemberRequest createMemberRequest) {
@@ -37,7 +40,11 @@ public class MainController {
     }
 
     @PostMapping("/user/test")
-    public String test() {
+    public String test(HttpServletRequest request) {
+        String authorization = request.getHeader("Authorization");
+
+        log.info("authorization = {}",authorization);
+
         return "Hello";
     }
 }

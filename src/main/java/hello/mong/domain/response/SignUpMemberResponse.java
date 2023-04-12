@@ -1,6 +1,5 @@
 package hello.mong.domain.response;
 
-import hello.mong.domain.Role;
 import hello.mong.domain.entity.Authority;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

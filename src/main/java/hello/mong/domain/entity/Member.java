@@ -1,7 +1,6 @@
 package hello.mong.domain.entity;
 
 import hello.mong.auditing.BaseTimeEntity;
-import hello.mong.domain.Role;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;

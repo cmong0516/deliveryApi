@@ -1,6 +1,5 @@
 package hello.mong.service;
 
-import hello.mong.domain.Role;
 import hello.mong.domain.entity.Authority;
 import hello.mong.domain.request.CreateMemberRequest;
 import hello.mong.domain.entity.Member;

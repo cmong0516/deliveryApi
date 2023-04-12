@@ -1,6 +1,5 @@
 package hello.mong.utils;
 
-import hello.mong.domain.Role;
 import hello.mong.domain.entity.Authority;
 import hello.mong.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
@@ -68,10 +67,6 @@ public class JwtProvider {
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(this.getMember(token));
 
-        log.info("userDetails.getUsername() = {}",userDetails.getUsername());
-        log.info("userDetails.getPassword() = {}",userDetails.getPassword());
-        log.info("userDetails.getAuthorities().toString() = {}",userDetails.getAuthorities().toString());
-
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
@@ -88,8 +83,6 @@ public class JwtProvider {
 
     public boolean validateToken(String token) {
         log.info("JwtProvider.validateToken() token = {}",token);
-        log.info(token.substring(0, "BEARER ".length()));
-        log.info("token = token.split(\" \")[1].trim() = {}",token.split(" ")[1].trim());
 
         try {
             if (!token.substring(0, "BEARER ".length()).equalsIgnoreCase("BEARER ")) {

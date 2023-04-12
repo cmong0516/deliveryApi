@@ -1,6 +1,5 @@
 package hello.mong.config;
 
-import hello.mong.domain.Role;
 import hello.mong.utils.JwtAuthenticationFilter;
 import hello.mong.utils.JwtProvider;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class SpringSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/member/new", "/member/login")
+                .antMatchers("/member/new", "/member/login","/h2-console/**45")
                 .permitAll()
                 .antMatchers("/user/**")
                 .hasRole("USER")
