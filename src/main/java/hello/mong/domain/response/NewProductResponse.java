@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class NewProductResponse {
-    private String name;
-    private int price;
-    private CanOrder state;
+    private String productName;
+    private int productPrice;
+    private CanOrder productState;
     private String shopName;
     private String shopPhone;
     private String shopCity;
@@ -16,9 +16,9 @@ public class NewProductResponse {
     @QueryProjection
     public NewProductResponse(String name, int price, CanOrder state, String shopName, String shopPhone,
                               String shopCity) {
-        this.name = name;
-        this.price = price;
-        this.state = state;
+        this.productName = name;
+        this.productPrice = price;
+        this.productState = state;
         this.shopName = shopName;
         this.shopPhone = shopPhone;
         this.shopCity = shopCity;

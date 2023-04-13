@@ -1,5 +1,5 @@
 package hello.mong.domain.entity;
 
 public enum CanOrder {
-    CAN,CANT
+    CAN_ORDER,CANT_ORDER
 }

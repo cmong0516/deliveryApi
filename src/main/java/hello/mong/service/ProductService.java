@@ -26,7 +26,7 @@ public class ProductService {
                 .price(request.getPrice())
                 .shop(shopJpaRepository.findByName(request.getShopName())
                         .orElseThrow(() -> new RuntimeException(request.getShopName() + " 을 찾을수 없습니다.")))
-                .state(CanOrder.CAN)
+                .state(CanOrder.CAN_ORDER)
                 .build();
 
         productJpaRepository.save(product);
