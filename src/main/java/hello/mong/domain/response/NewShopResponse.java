@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewDeliveryResponse {
-
+public class NewShopResponse {
     private String name;
-    private int age;
-    private String city;
     private String phone;
+    private String city;
 }
