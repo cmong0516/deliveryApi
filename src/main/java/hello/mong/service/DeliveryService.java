@@ -1,7 +1,6 @@
 package hello.mong.service;
 
 import hello.mong.domain.entity.Delivery;
-import hello.mong.domain.entity.Delivery.DeliveryBuilder;
 import hello.mong.domain.request.NewDeliveryRequest;
 import hello.mong.repository.delivery.DeliveryJpaRepository;
 import lombok.RequiredArgsConstructor;

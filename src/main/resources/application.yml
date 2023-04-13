@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:studywithme
+    url: jdbc:h2:mem:mong
     username: mong
     password:
     driver-class-name: org.h2.Driver
