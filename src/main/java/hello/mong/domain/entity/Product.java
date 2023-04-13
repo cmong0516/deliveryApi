@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,4 +24,10 @@ public class Product {
     private String name;
     private int price;
     private CanOrder state;
+    @ManyToOne
+    private Shop shop;
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 }

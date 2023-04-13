@@ -18,7 +18,7 @@ public class ShopService {
         Shop shop = Shop.builder()
                 .name(request.getName())
                 .phone(request.getPhone())
-                .city(request.getCity())
+                .city(request.getCity().toUpperCase())
                 .build();
 
         shopJpaRepository.save(shop);
