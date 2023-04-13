@@ -43,7 +43,7 @@ public class SpringSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/member/new", "/member/login", "/h2-console/**45")
+                .antMatchers("/member/new", "/member/login", "/h2-console/**","/**/new")
                 .permitAll()
                 .antMatchers("/member/**")
                 .hasRole("USER")

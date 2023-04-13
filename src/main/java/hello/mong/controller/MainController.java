@@ -49,8 +49,4 @@ public class MainController {
         return member + " 님이 성공적으로 로그인 되었습니다.";
     }
 
-    @PostMapping("/delivery/new")
-    public ResponseEntity<NewDeliveryResponse> newDelivery() {
-        return null;
-    }
 }

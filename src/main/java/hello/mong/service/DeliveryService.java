@@ -17,7 +17,7 @@ public class DeliveryService {
         Delivery delivery = Delivery.builder()
                 .name(request.getName())
                 .age(request.getAge())
-                .city(request.getCity())
+                .city(request.getCity().toUpperCase())
                 .phone(request.getPhone())
                 .build();
 
