@@ -7,5 +7,6 @@ public class NewOrderRequest {
 
     private String email;
     private String password;
-    private
+    private String productName;
+    private int productQuantity;
 }

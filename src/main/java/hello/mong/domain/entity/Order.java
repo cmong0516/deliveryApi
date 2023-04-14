@@ -25,7 +25,8 @@ public class Order {
     @OneToOne
     private Member member;
     @OneToOne
-    private Shop shop;
+    private Product product;
+    private int quantity;
     @OneToOne
     private Delivery delivery;
     private OrderState orderState;
