@@ -8,6 +8,8 @@ import hello.mong.domain.entity.QProduct;
 import hello.mong.domain.entity.QShop;
 import hello.mong.domain.response.NewProductResponse;
 import hello.mong.domain.response.QNewProductResponse;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +29,15 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                 .from(product)
                 .where(product.id.eq(id))
                 .fetchOne();
+    }
+
+    @Override
+    public List<NewProductResponse> allProduct() {
+        return jpaQueryFactory.select(
+                        new QNewProductResponse(product.name, product.price, product.state, product.shop.name,
+                                product.shop.phone,
+                                product.shop.city))
+                .from(product)
+                .fetch();
     }
 }

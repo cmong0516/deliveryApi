@@ -3,10 +3,12 @@ package hello.mong.controller;
 import hello.mong.domain.request.NewProductRequest;
 import hello.mong.domain.response.NewProductResponse;
 import hello.mong.service.ProductService;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +24,10 @@ public class ProductController {
         NewProductResponse newProductResponse = productService.newProduct(request);
 
         return new ResponseEntity<>(newProductResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("product/all")
+    public List<NewProductResponse> allProduct() {
+        return productService.allProduct();
     }
 }

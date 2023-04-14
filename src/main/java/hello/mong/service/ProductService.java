@@ -7,6 +7,7 @@ import hello.mong.domain.response.NewProductResponse;
 import hello.mong.repository.product.ProductJpaRepository;
 import hello.mong.repository.product.ProductRepositoryCustom;
 import hello.mong.repository.shop.ShopJpaRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,5 +33,10 @@ public class ProductService {
         productJpaRepository.save(product);
 
         return productRepositoryCustom.newProductResponse(product.getId());
+    }
+
+    @Transactional
+    public List<NewProductResponse> allProduct() {
+        return productRepositoryCustom.allProduct();
     }
 }

@@ -1,6 +1,8 @@
 package hello.mong.domain.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class Product {
 
     private String name;
     private int price;
+    @Enumerated(EnumType.STRING)
     private CanOrder state;
     @ManyToOne
     private Shop shop;
