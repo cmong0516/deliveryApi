@@ -3,7 +3,6 @@ package hello.mong.controller;
 import hello.mong.domain.request.NewMemberRequest;
 import hello.mong.domain.request.LoginMemberRequest;
 import hello.mong.domain.response.LoginMemberResponse;
-import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class MainController {
+public class MemberController {
 
     private final MemberService memberService;
     private final JwtProvider jwtProvider;

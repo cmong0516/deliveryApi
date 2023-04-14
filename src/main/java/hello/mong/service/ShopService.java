@@ -24,8 +24,8 @@ public class ShopService {
         shopJpaRepository.save(shop);
 
         return NewShopResponse.builder()
-                .name(shop.getName())
-                .phone(shop.getPhone())
+                .shopName(shop.getName())
+                .shopPhone(shop.getPhone())
                 .city(shop.getCity())
                 .build();
     }

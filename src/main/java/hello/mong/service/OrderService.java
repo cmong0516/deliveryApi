@@ -5,6 +5,7 @@ import hello.mong.domain.entity.Order;
 import hello.mong.domain.entity.OrderState;
 import hello.mong.domain.entity.Product;
 import hello.mong.domain.request.NewOrderRequest;
+import hello.mong.domain.response.NewOrderResponse;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.repository.order.OrderRepositoryCustom;
@@ -23,7 +24,7 @@ public class OrderService {
     private final PasswordEncoder passwordEncoder;
     private final ProductJpaRepository productJpaRepository;
 
-    public void newOrder(NewOrderRequest request) {
+    public NewOrderResponse newOrder(NewOrderRequest request) {
         Member member = memberJpaRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException(request.getEmail() + " 회원을 찾을수 없습니다."));
 
@@ -42,5 +43,17 @@ public class OrderService {
                 .build();
 
         orderJpaRepository.save(order);
+
+        return NewOrderResponse.builder()
+                .memberId(member.getEmail())
+                .memberPhone(member.getPhone())
+                .shopName(product.getShop().getName())
+                .shopPhone(product.getShop().getPhone())
+                .productName(product.getName())
+                .productPrice(product.getPrice())
+                .quantity(request.getProductQuantity())
+                .totalPrice(product.getPrice() * request.getProductQuantity())
+                .orderState(OrderState.PROGRESS)
+                .build();
     }
 }

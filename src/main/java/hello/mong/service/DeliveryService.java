@@ -24,8 +24,8 @@ public class DeliveryService {
         deliveryJpaRepository.save(delivery);
 
         return NewDeliveryResponse.builder()
-                .name(delivery.getName())
-                .age(delivery.getAge())
+                .deliveryName(delivery.getName())
+                .deliveryAge(delivery.getAge())
                 .city(delivery.getCity())
                 .phone(delivery.getPhone())
                 .build();
