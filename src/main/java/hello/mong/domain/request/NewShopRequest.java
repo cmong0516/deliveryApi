@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class NewShopRequest {
-    private String name;
-    private String phone;
+    private String shopName;
+    private String shopPhone;
     private String city;
 }

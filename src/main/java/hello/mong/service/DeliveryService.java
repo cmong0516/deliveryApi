@@ -15,10 +15,10 @@ public class DeliveryService {
 
     public NewDeliveryResponse newDelivery(NewDeliveryRequest request) {
         Delivery delivery = Delivery.builder()
-                .name(request.getName())
-                .age(request.getAge())
+                .name(request.getDeliveryName())
+                .age(request.getDeliveryAge())
                 .city(request.getCity().toUpperCase())
-                .phone(request.getPhone())
+                .phone(request.getDeliveryPhone())
                 .build();
 
         deliveryJpaRepository.save(delivery);

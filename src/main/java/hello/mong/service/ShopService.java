@@ -16,8 +16,8 @@ public class ShopService {
 
     public NewShopResponse newShop(NewShopRequest request) {
         Shop shop = Shop.builder()
-                .name(request.getName())
-                .phone(request.getPhone())
+                .name(request.getShopName())
+                .phone(request.getShopPhone())
                 .city(request.getCity().toUpperCase())
                 .build();
 

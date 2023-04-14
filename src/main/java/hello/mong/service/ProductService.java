@@ -22,8 +22,8 @@ public class ProductService {
     @Transactional
     public NewProductResponse newProduct(NewProductRequest request) {
         Product product = Product.builder()
-                .name(request.getName())
-                .price(request.getPrice())
+                .name(request.getProductName())
+                .price(request.getProductPrice())
                 .shop(shopJpaRepository.findByName(request.getShopName())
                         .orElseThrow(() -> new RuntimeException(request.getShopName() + " 을 찾을수 없습니다.")))
                 .state(CanOrder.CAN_ORDER)

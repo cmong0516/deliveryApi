@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NewDeliveryRequest {
-    private String name;
-    private int age;
+    private String deliveryName;
+    private int deliveryAge;
     private String city;
-    private String phone;
+    private String deliveryPhone;
 }
