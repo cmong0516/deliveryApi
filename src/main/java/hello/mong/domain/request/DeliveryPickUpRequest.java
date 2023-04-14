@@ -4,9 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class LoginMemberRequest {
+public class DeliveryPickUpRequest {
     @NotEmpty
-    private String email;
-    @NotEmpty
-    private String password;
+    private Long orderId;
 }

@@ -1,9 +1,12 @@
 package hello.mong.domain.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,4 +27,11 @@ public class Delivery {
     private int age;
     private String city;
     private String phone;
+
+    @OneToMany
+    private List<Order> orders = new ArrayList<>();
+
+    public void setOrders(Order order) {
+        orders.add(order);
+    }
 }

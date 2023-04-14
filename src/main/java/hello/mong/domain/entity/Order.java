@@ -30,4 +30,9 @@ public class Order {
     @OneToOne
     private Delivery delivery;
     private OrderState orderState;
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrders(this);
+    }
 }

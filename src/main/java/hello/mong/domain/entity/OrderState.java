@@ -1,5 +1,5 @@
 package hello.mong.domain.entity;
 
 public enum OrderState {
-    FINISH,PROGRESS,CANCEL
+    NOT_YET,FINISH,PROGRESS,CANCEL
 }
