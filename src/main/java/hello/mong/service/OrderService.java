@@ -39,7 +39,7 @@ public class OrderService {
                 .member(member)
                 .product(product)
                 .quantity(request.getProductQuantity())
-                .orderState(OrderState.PROGRESS)
+                .orderState(OrderState.NOT_YET)
                 .build();
 
         orderJpaRepository.save(order);
@@ -53,7 +53,7 @@ public class OrderService {
                 .productPrice(product.getPrice())
                 .quantity(request.getProductQuantity())
                 .totalPrice(product.getPrice() * request.getProductQuantity())
-                .orderState(OrderState.PROGRESS)
+                .orderState(order.getOrderState())
                 .build();
     }
 }

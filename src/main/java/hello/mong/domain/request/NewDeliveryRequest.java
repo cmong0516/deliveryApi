@@ -11,12 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class NewDeliveryRequest {
+
     @NotEmpty
-    private String deliveryName;
+    private String email;
     @NotEmpty
-    private int deliveryAge;
-    @NotEmpty
-    private String city;
-    @NotEmpty
-    private String deliveryPhone;
+    private String password;
 }

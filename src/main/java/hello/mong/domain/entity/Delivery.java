@@ -24,8 +24,6 @@ public class Delivery {
     private Long id;
 
     private String name;
-    private int age;
-    private String city;
     private String phone;
 
     @OneToMany

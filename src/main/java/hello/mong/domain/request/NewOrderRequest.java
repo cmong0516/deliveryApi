@@ -1,9 +1,14 @@
 package hello.mong.domain.request;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewOrderRequest {
     @NotEmpty
     private String email;
@@ -11,6 +16,6 @@ public class NewOrderRequest {
     private String password;
     @NotEmpty
     private String productName;
-    @NotEmpty
+    @NotNull
     private int productQuantity;
 }

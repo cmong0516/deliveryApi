@@ -1,6 +1,8 @@
 package hello.mong.service;
 
+import hello.mong.domain.entity.Authority;
 import hello.mong.domain.entity.Delivery;
+import hello.mong.domain.entity.Member;
 import hello.mong.domain.entity.Order;
 import hello.mong.domain.entity.OrderState;
 import hello.mong.domain.request.DeliveryPickUpRequest;
@@ -8,7 +10,9 @@ import hello.mong.domain.request.NewDeliveryRequest;
 import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.OrderResponse;
 import hello.mong.repository.delivery.DeliveryJpaRepository;
+import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
+import java.util.Collections;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,21 +23,26 @@ public class DeliveryService {
 
     private final DeliveryJpaRepository deliveryJpaRepository;
     private final OrderJpaRepository orderJpaRepository;
+    private final MemberJpaRepository memberJpaRepository;
 
     public NewDeliveryResponse newDelivery(NewDeliveryRequest request) {
+
+        String email = request.getEmail();
+
+        Member member = memberJpaRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException(email + " 유저를 찾을수 없습니다."));
+
+        member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_DELIVERY").build()));
+
         Delivery delivery = Delivery.builder()
-                .name(request.getDeliveryName())
-                .age(request.getDeliveryAge())
-                .city(request.getCity().toUpperCase())
-                .phone(request.getDeliveryPhone())
+                .name(member.getName())
+                .phone(member.getPhone())
                 .build();
 
         deliveryJpaRepository.save(delivery);
 
         return NewDeliveryResponse.builder()
                 .deliveryName(delivery.getName())
-                .deliveryAge(delivery.getAge())
-                .city(delivery.getCity())
                 .phone(delivery.getPhone())
                 .build();
     }

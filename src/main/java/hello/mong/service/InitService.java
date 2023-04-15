@@ -24,7 +24,6 @@ public class InitService {
     @PostConstruct
     public void init() {
         initMember();
-        initDelivery();
         initShop();
         initProduct();
 
@@ -42,17 +41,7 @@ public class InitService {
         }
     }
 
-    public void initDelivery() {
-        for (int i = 1; i < 11; i++) {
-            NewDeliveryRequest request = NewDeliveryRequest.builder()
-                    .deliveryName("delivery" + i)
-                    .deliveryAge((int) (Math.random() * 100) + 1)
-                    .deliveryPhone("010-1111-" + i)
-                    .city("seoul")
-                    .build();
-            deliveryService.newDelivery(request);
-        }
-    }
+
 
     public void initShop() {
         for (int i = 0; i < 30; i++) {

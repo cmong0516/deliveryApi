@@ -51,6 +51,8 @@ public class SpringSecurityConfig {
                 .hasRole("ADMIN")
                 .antMatchers("/delivery/**")
                 .hasRole("DELIVERY")
+                .anyRequest()
+                .authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()

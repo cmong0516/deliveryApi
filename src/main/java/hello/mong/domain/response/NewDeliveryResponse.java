@@ -12,7 +12,5 @@ import lombok.NoArgsConstructor;
 public class NewDeliveryResponse {
 
     private String deliveryName;
-    private int deliveryAge;
-    private String city;
     private String phone;
 }
