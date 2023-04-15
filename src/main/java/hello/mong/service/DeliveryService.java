@@ -12,7 +12,9 @@ import hello.mong.domain.response.OrderResponse;
 import hello.mong.repository.delivery.DeliveryJpaRepository;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
+import hello.mong.utils.JwtProvider;
 import java.util.Collections;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ public class DeliveryService {
     private final DeliveryJpaRepository deliveryJpaRepository;
     private final OrderJpaRepository orderJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
+    private final JwtProvider jwtProvider;
 
     public NewDeliveryResponse newDelivery(NewDeliveryRequest request) {
 
@@ -48,9 +51,15 @@ public class DeliveryService {
     }
 
     @Transactional
-    public OrderResponse pickUp(Long id, DeliveryPickUpRequest request) {
-        Delivery delivery = deliveryJpaRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(id + " 를 찾을수 없습니다."));
+    public OrderResponse pickUp(DeliveryPickUpRequest request, HttpServletRequest httpServletRequest) {
+        String token = httpServletRequest.getHeader("Authorization");
+        String memberEmail = jwtProvider.getMember(token);
+
+        Member member = memberJpaRepository.findByEmail(memberEmail)
+                .orElseThrow(() -> new IllegalArgumentException(memberEmail + " 유저를 찾을수 없습니다."));
+
+        Delivery delivery = deliveryJpaRepository.findById(member.getId())
+                .orElseThrow(() -> new IllegalArgumentException(member.getId() + " 를 찾을수 없습니다."));
 
         Order order = orderJpaRepository.findById(request.getOrderId())
                 .orElseThrow(() -> new IllegalArgumentException(request.getOrderId() + " 를 찾을수 없습니다."));

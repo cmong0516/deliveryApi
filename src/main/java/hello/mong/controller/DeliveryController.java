@@ -5,6 +5,7 @@ import hello.mong.domain.request.NewDeliveryRequest;
 import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.OrderResponse;
 import hello.mong.service.DeliveryService;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +28,10 @@ public class DeliveryController {
         return new ResponseEntity<>(newDeliveryResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/delivery/pick-up/{id}")
-    public ResponseEntity<DeliveryService> deliveryPickUp(@PathVariable Long id, @RequestBody DeliveryPickUpRequest request) {
-        OrderResponse orderResponse = deliveryService.pickUp(id, request);
+    @PostMapping("/delivery/pick-up")
+    public ResponseEntity<DeliveryService> deliveryPickUp(@RequestBody DeliveryPickUpRequest request,
+                                                          HttpServletRequest httpServletRequest) {
+        OrderResponse orderResponse = deliveryService.pickUp(request,httpServletRequest);
 
         return new ResponseEntity<>(deliveryService, HttpStatus.OK);
     }
