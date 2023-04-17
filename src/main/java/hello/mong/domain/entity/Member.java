@@ -31,9 +31,6 @@ public class Member extends BaseTimeEntity {
     private String password;
     private String phone;
 
-    private String refreshToken;
-
-
     @OneToMany(mappedBy = "member",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Authority> roles = new ArrayList<>();
 
@@ -42,7 +39,4 @@ public class Member extends BaseTimeEntity {
         role.forEach(o -> o.setMember(this));
     }
 
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
 }

@@ -14,13 +14,16 @@ import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.utils.JwtProvider;
 import java.util.Collections;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DeliveryService {
 
     private final DeliveryJpaRepository deliveryJpaRepository;
@@ -35,7 +38,11 @@ public class DeliveryService {
         Member member = memberJpaRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email + " 유저를 찾을수 없습니다."));
 
-        member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_DELIVERY").build()));
+        List<Authority> roles = member.getRoles();
+
+        roles.add(roles.size(),Authority.builder().name("ROLE_DELIVERY").build());
+
+        member.setRoles(roles);
 
         Delivery delivery = Delivery.builder()
                 .name(member.getName())
@@ -52,8 +59,17 @@ public class DeliveryService {
 
     @Transactional
     public OrderResponse pickUp(DeliveryPickUpRequest request, HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader("Authorization");
+        String authorization = httpServletRequest.getHeader("Authorization");
+
+        log.info(authorization);
+
+        String token = authorization.split(" ")[1].trim();
+
+        log.info(token);
+
         String memberEmail = jwtProvider.getMember(token);
+
+        log.info(memberEmail);
 
         Member member = memberJpaRepository.findByEmail(memberEmail)
                 .orElseThrow(() -> new IllegalArgumentException(memberEmail + " 유저를 찾을수 없습니다."));
