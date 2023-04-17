@@ -30,11 +30,11 @@ public class DeliveryController {
     }
 
     @PostMapping("/delivery/pick-up")
-    public ResponseEntity<DeliveryService> deliveryPickUp(@RequestBody DeliveryPickUpRequest request,
+    public ResponseEntity<OrderResponse> deliveryPickUp(@RequestBody DeliveryPickUpRequest request,
                                                           HttpServletRequest httpServletRequest) {
         OrderResponse orderResponse = deliveryService.pickUp(request,httpServletRequest);
 
-        return new ResponseEntity<>(deliveryService, HttpStatus.OK);
+        return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 
     @PostMapping("/delivery/test")

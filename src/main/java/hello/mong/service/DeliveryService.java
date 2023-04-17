@@ -62,28 +62,44 @@ public class DeliveryService {
 
     @Transactional
     public OrderResponse pickUp(DeliveryPickUpRequest request, HttpServletRequest httpServletRequest) {
+
         String authorization = httpServletRequest.getHeader("Authorization");
 
-        log.info(authorization);
+        log.info("authorization = {} ",authorization);
 
         String token = authorization.split(" ")[1].trim();
 
-        log.info(token);
+        log.info("token = {}",token);
 
         String memberEmail = jwtProvider.getMember(token);
 
-        log.info(memberEmail);
+        log.info("memberEmail = {}" ,memberEmail);
 
         Member member = memberJpaRepository.findByEmail(memberEmail)
                 .orElseThrow(() -> new IllegalArgumentException(memberEmail + " 유저를 찾을수 없습니다."));
 
+
         Delivery delivery = deliveryJpaRepository.findById(member.getId())
                 .orElseThrow(() -> new IllegalArgumentException(member.getId() + " 를 찾을수 없습니다."));
+
 
         Order order = orderJpaRepository.findById(request.getOrderId())
                 .orElseThrow(() -> new IllegalArgumentException(request.getOrderId() + " 를 찾을수 없습니다."));
 
+
         order.setDelivery(delivery);
+
+        log.info("order.getMember().getEmail() = {}" ,order.getMember().getEmail());
+        log.info("order.getMember().getPhone() = {}", order.getMember().getPhone());
+        log.info("order.getProduct().getShop().getName() = {}" ,order.getProduct().getShop().getName());
+        log.info("order.getProduct().getShop().getPhone() = {}" , order.getProduct().getShop().getPhone());
+        log.info("order.getProduct().getName() = {}" , order.getProduct().getName());
+        log.info("order.getProduct().getPrice() = {}" , order.getProduct().getPrice());
+        log.info("order.getQuantity() = {}" , order.getQuantity());
+        log.info("order.getQuantity() * order.getProduct().getPrice() = {}" , order.getQuantity() * order.getProduct().getPrice());
+        log.info("OrderState.PROGRESS = {}" , OrderState.PROGRESS);
+        log.info("order.getDelivery().getName() = {}", order.getDelivery().getName());
+        log.info("order.getDelivery().getPhone() = {}" , order.getDelivery().getPhone());
 
         return OrderResponse.builder()
                 .memberId(order.getMember().getEmail())
