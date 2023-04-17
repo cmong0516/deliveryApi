@@ -13,4 +13,5 @@ public class NewDeliveryResponse {
 
     private String deliveryName;
     private String phone;
+    private String token;
 }

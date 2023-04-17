@@ -51,9 +51,12 @@ public class DeliveryService {
 
         deliveryJpaRepository.save(delivery);
 
+        String token = jwtProvider.createToken(member.getEmail(), member.getRoles());
+
         return NewDeliveryResponse.builder()
                 .deliveryName(delivery.getName())
                 .phone(delivery.getPhone())
+                .token(token)
                 .build();
     }
 
