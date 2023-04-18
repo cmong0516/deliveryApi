@@ -3,8 +3,8 @@ package hello.mong.service;
 import hello.mong.domain.entity.Authority;
 import hello.mong.domain.entity.Delivery;
 import hello.mong.domain.entity.Member;
-import hello.mong.domain.entity.Order;
 import hello.mong.domain.entity.OrderState;
+import hello.mong.domain.entity.Orders;
 import hello.mong.domain.request.DeliveryPickUpRequest;
 import hello.mong.domain.request.NewDeliveryRequest;
 import hello.mong.domain.response.NewDeliveryResponse;
@@ -74,23 +74,23 @@ public class DeliveryService {
         Delivery delivery = deliveryJpaRepository.findById(member.getId())
                 .orElseThrow(() -> new IllegalArgumentException(member.getId() + " 를 찾을수 없습니다."));
 
-        Order order = orderJpaRepository.findById(request.getOrderId())
+        Orders orders = orderJpaRepository.findById(request.getOrderId())
                 .orElseThrow(() -> new IllegalArgumentException(request.getOrderId() + " 를 찾을수 없습니다."));
 
-        order.setDelivery(delivery);
+        orders.setDelivery(delivery);
 
         return OrderResponse.builder()
-                .memberId(order.getMember().getEmail())
-                .memberPhone(order.getMember().getPhone())
-                .shopName(order.getProduct().getShop().getName())
-                .shopPhone(order.getProduct().getShop().getPhone())
-                .productName(order.getProduct().getName())
-                .productPrice(order.getProduct().getPrice())
-                .quantity(order.getQuantity())
-                .totalPrice(order.getQuantity() * order.getProduct().getPrice())
+                .memberId(orders.getMember().getEmail())
+                .memberPhone(orders.getMember().getPhone())
+                .shopName(orders.getProduct().getShop().getName())
+                .shopPhone(orders.getProduct().getShop().getPhone())
+                .productName(orders.getProduct().getName())
+                .productPrice(orders.getProduct().getPrice())
+                .quantity(orders.getQuantity())
+                .totalPrice(orders.getQuantity() * orders.getProduct().getPrice())
                 .orderState(OrderState.PROGRESS)
-                .deliveryName(order.getDelivery().getName())
-                .deliveryPhone(order.getDelivery().getPhone())
+                .deliveryName(orders.getDelivery().getName())
+                .deliveryPhone(orders.getDelivery().getPhone())
                 .build();
 
     }

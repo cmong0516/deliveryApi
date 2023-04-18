@@ -27,9 +27,9 @@ public class Delivery {
     private String phone;
 
     @OneToMany
-    private List<Order> orders = new ArrayList<>();
+    private List<Orders> orders = new ArrayList<>();
 
-    public void setOrders(Order order) {
+    public void setOrders(Orders order) {
         orders.add(order);
     }
 }

@@ -14,8 +14,9 @@ spring:
     hibernate:
       ddl-auto: create
     properties:
-      show_sql: true
-      format_sql: true
+      hibernate:
+        show_sql: true
+
 
 jwt:
   secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHb11

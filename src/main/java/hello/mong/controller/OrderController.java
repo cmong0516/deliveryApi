@@ -34,8 +34,6 @@ public class OrderController {
 
         List<AllOrderResponse> allOrderResponses = orderService.allOrderResponses();
 
-        log.info(String.valueOf(allOrderResponses.size()));
-
         return new ResponseEntity<>(allOrderResponses, HttpStatus.OK);
     }
 }

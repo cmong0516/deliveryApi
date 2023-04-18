@@ -2,7 +2,6 @@ package hello.mong.domain.response;
 
 import com.querydsl.core.annotations.QueryProjection;
 import hello.mong.domain.entity.OrderState;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,8 +23,7 @@ public class AllOrderResponse {
 
     @QueryProjection
     public AllOrderResponse(String clientName, String clientPhone, String shopName, String shopPhone,
-                            String productName, int productPrice, int orderQuantity,
-                            String deliveryName, String deliveryPhone, OrderState orderState) {
+                            String productName, int productPrice, int orderQuantity,String deliveryName, String deliveryPhone, OrderState orderState) {
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.shopName = shopName;
