@@ -49,7 +49,7 @@ public class SpringSecurityConfig {
                 .hasRole("USER")
                 .antMatchers("/admin/**")
                 .hasRole("ADMIN")
-                .antMatchers("/delivery/**")
+                .antMatchers("/delivery/**","/order/all")
                 .hasRole("DELIVERY")
                 .anyRequest()
                 .authenticated()

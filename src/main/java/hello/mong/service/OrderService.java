@@ -5,11 +5,13 @@ import hello.mong.domain.entity.Order;
 import hello.mong.domain.entity.OrderState;
 import hello.mong.domain.entity.Product;
 import hello.mong.domain.request.NewOrderRequest;
+import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.NewOrderResponse;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.repository.order.OrderRepositoryCustom;
 import hello.mong.repository.product.ProductJpaRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,9 @@ public class OrderService {
                 .totalPrice(product.getPrice() * request.getProductQuantity())
                 .orderState(order.getOrderState())
                 .build();
+    }
+
+    public List<AllOrderResponse> allOrderResponses() {
+        return orderRepositoryCustom.allOrder();
     }
 }

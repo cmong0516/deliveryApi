@@ -24,7 +24,7 @@ public class AllOrderResponse {
 
     @QueryProjection
     public AllOrderResponse(String clientName, String clientPhone, String shopName, String shopPhone,
-                            String productName, int productPrice, int orderQuantity, int orderTotalPrice,
+                            String productName, int productPrice, int orderQuantity,
                             String deliveryName, String deliveryPhone, OrderState orderState) {
         this.clientName = clientName;
         this.clientPhone = clientPhone;
@@ -33,7 +33,7 @@ public class AllOrderResponse {
         this.productName = productName;
         this.productPrice = productPrice;
         this.orderQuantity = orderQuantity;
-        this.orderTotalPrice = orderTotalPrice;
+        this.orderTotalPrice = productPrice * orderQuantity;
         this.deliveryName = deliveryName;
         this.deliveryPhone = deliveryPhone;
         this.orderState = orderState;

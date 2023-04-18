@@ -3,7 +3,6 @@ package hello.mong.repository.order;
 import static hello.mong.domain.entity.QOrder.order;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hello.mong.domain.entity.QOrder;
 import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.QAllOrderResponse;
 import java.util.List;
@@ -19,8 +18,11 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     @Override
     public List<AllOrderResponse> allOrder() {
 
-        jpaQueryFactory.select(new QAllOrderResponse(order.member.name,order.member.phone,
-                order.product.shop.name,order.product.shop.phone,order.product.name,order.product.price,))
-        return null;
+        return jpaQueryFactory.select(new QAllOrderResponse(order.member.name, order.member.phone,
+                        order.product.shop.name, order.product.shop.phone, order.product.name, order.product.price,
+                        order.quantity,
+                        order.delivery.name, order.delivery.phone, order.orderState))
+                .from(order)
+                .fetch();
     }
 }
