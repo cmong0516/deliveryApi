@@ -25,6 +25,8 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
         return jpaQueryFactory.select(new QAllOrderResponse(orders.member.name, orders.member.phone,
                         orders.product.shop.name, orders.product.shop.phone, orders.product.name, orders.product.price,
                         orders.quantity,
+                        orders.delivery.name,
+                        orders.delivery.phone,
                         orders.orderState))
                 .from(orders)
                 .leftJoin(orders.member,member)
