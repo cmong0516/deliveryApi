@@ -32,7 +32,7 @@ public class JwtProvider {
 
     private Key key;
 
-    private final long exp = 1000L * 60;
+    private final long exp = 1000L * 60 * 60;
 
     private final CustomUserDetailsService customUserDetailsService;
 

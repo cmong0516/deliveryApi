@@ -77,6 +77,8 @@ public class DeliveryService {
         Orders orders = orderJpaRepository.findById(request.getOrderId())
                 .orElseThrow(() -> new IllegalArgumentException(request.getOrderId() + " 를 찾을수 없습니다."));
 
+        orders.setOrderState(OrderState.PROGRESS);
+
         orders.setDelivery(delivery);
 
         return OrderResponse.builder()

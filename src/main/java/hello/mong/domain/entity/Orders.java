@@ -36,4 +36,8 @@ public class Orders {
         this.delivery = delivery;
         delivery.setOrders(this);
     }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
 }
