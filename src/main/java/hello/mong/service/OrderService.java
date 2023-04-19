@@ -40,7 +40,7 @@ public class OrderService {
         String memberEmail = jwtProvider.getMember(token);
 
         if (!request.getEmail().equals(memberEmail)) {
-            throw new RuntimeException();
+            throw new RuntimeException("로그인 유저 정보와 토큰 정보가 일치하지 않습니다.");
         }
 
         Member member = memberJpaRepository.findByEmail(request.getEmail())

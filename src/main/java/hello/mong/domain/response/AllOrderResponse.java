@@ -11,6 +11,7 @@ public class AllOrderResponse {
 
     private Long orderId;
     private String clientName;
+    private String clientEmail;
     private String clientPhone;
     private String shopName;
     private String shopPhone;
@@ -24,10 +25,11 @@ public class AllOrderResponse {
 
 
     @QueryProjection
-    public AllOrderResponse(Long orderId,String clientName, String clientPhone, String shopName, String shopPhone,
+    public AllOrderResponse(Long orderId,String clientName,String clientEmail, String clientPhone, String shopName, String shopPhone,
                             String productName, int productPrice, int orderQuantity,String deliveryName, String deliveryPhone, OrderState orderState) {
         this.orderId = orderId;
         this.clientName = clientName;
+        this.clientEmail = clientEmail;
         this.clientPhone = clientPhone;
         this.shopName = shopName;
         this.shopPhone = shopPhone;

@@ -23,7 +23,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     @Override
     public List<AllOrderResponse> allOrder() {
 
-        return jpaQueryFactory.select(new QAllOrderResponse(orders.id,orders.member.name, orders.member.phone,
+        return jpaQueryFactory.select(new QAllOrderResponse(orders.id,orders.member.name,orders.member.email, orders.member.phone,
                         orders.product.shop.name, orders.product.shop.phone, orders.product.name, orders.product.price,
                         orders.quantity,
                         orders.delivery.name,
@@ -38,7 +38,7 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
     @Override
     public List<AllOrderResponse> notYetAllOrder() {
 
-        return jpaQueryFactory.select(new QAllOrderResponse(orders.id,orders.member.name, orders.member.phone,
+        return jpaQueryFactory.select(new QAllOrderResponse(orders.id,orders.member.name,orders.member.email, orders.member.phone,
                         orders.product.shop.name, orders.product.shop.phone, orders.product.name, orders.product.price,
                         orders.quantity,
                         orders.delivery.name,
