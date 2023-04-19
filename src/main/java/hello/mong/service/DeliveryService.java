@@ -33,9 +33,19 @@ public class DeliveryService {
     private final JwtProvider jwtProvider;
     private final OrderRepositoryCustom orderRepositoryCustom;
 
-    public NewDeliveryResponse newDelivery(NewDeliveryRequest request) {
+    public NewDeliveryResponse newDelivery(NewDeliveryRequest request,HttpServletRequest httpServletRequest) {
 
         String email = request.getEmail();
+
+        String authorization = httpServletRequest.getHeader("Authorization");
+
+        String getToken = authorization.split(" ")[1].trim();
+
+        String memberEmail = jwtProvider.getMember(getToken);
+
+        if (!email.equals(memberEmail)) {
+            throw new RuntimeException("유저 정보와 token 정보가 일치하지 않습니다.");
+        }
 
         Member member = memberJpaRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email + " 유저를 찾을수 없습니다."));

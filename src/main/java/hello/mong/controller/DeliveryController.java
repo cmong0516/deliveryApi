@@ -25,8 +25,8 @@ public class DeliveryController {
     private final JwtProvider jwtProvider;
 
     @PostMapping("/delivery/new")
-    public ResponseEntity<NewDeliveryResponse> newDelivery(@Valid @RequestBody NewDeliveryRequest request) {
-        NewDeliveryResponse newDeliveryResponse = deliveryService.newDelivery(request);
+    public ResponseEntity<NewDeliveryResponse> newDelivery(@Valid @RequestBody NewDeliveryRequest request,HttpServletRequest servletRequest) {
+        NewDeliveryResponse newDeliveryResponse = deliveryService.newDelivery(request,servletRequest);
 
         return new ResponseEntity<>(newDeliveryResponse, HttpStatus.OK);
     }
