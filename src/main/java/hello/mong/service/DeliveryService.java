@@ -7,11 +7,13 @@ import hello.mong.domain.entity.OrderState;
 import hello.mong.domain.entity.Orders;
 import hello.mong.domain.request.DeliveryPickUpRequest;
 import hello.mong.domain.request.NewDeliveryRequest;
+import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.OrderResponse;
 import hello.mong.repository.delivery.DeliveryJpaRepository;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
+import hello.mong.repository.order.OrderRepositoryCustom;
 import hello.mong.utils.JwtProvider;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,7 @@ public class DeliveryService {
     private final OrderJpaRepository orderJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
     private final JwtProvider jwtProvider;
+    private final OrderRepositoryCustom orderRepositoryCustom;
 
     public NewDeliveryResponse newDelivery(NewDeliveryRequest request) {
 
@@ -95,5 +98,9 @@ public class DeliveryService {
                 .deliveryPhone(orders.getDelivery().getPhone())
                 .build();
 
+    }
+
+    public List<AllOrderResponse> canPickUpOrders() {
+        return orderRepositoryCustom.notYetAllOrder();
     }
 }

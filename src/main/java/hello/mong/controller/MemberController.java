@@ -6,7 +6,6 @@ import hello.mong.domain.response.LoginMemberResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +38,5 @@ public class MemberController {
         return new ResponseEntity<>(new LoginMemberResponse("로그인에 성공하였습니다.", request.getEmail(), token), HttpStatus.OK);
     }
 
-    @PostMapping("/member/test")
-    public String test(HttpServletRequest request) {
-        String authorization = request.getHeader("Authorization");
-        String substring = authorization.split(" ")[1].trim();
-        String member = jwtProvider.getMember(substring);
-
-        return member + " 님이 성공적으로 로그인 되었습니다.";
-    }
 
 }

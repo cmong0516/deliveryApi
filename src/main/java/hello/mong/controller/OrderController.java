@@ -5,6 +5,7 @@ import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.NewOrderResponse;
 import hello.mong.service.OrderService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +23,9 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/order/new")
-    public ResponseEntity<NewOrderResponse> newOrder(@Valid @RequestBody NewOrderRequest request) {
+    public ResponseEntity<NewOrderResponse> newOrder(@Valid @RequestBody NewOrderRequest request, HttpServletRequest httpServletRequest) {
 
-        NewOrderResponse newOrderResponse = orderService.newOrder(request);
+        NewOrderResponse newOrderResponse = orderService.newOrder(request,httpServletRequest);
 
         return new ResponseEntity<>(newOrderResponse, HttpStatus.OK);
     }

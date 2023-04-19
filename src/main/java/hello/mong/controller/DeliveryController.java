@@ -2,10 +2,12 @@ package hello.mong.controller;
 
 import hello.mong.domain.request.DeliveryPickUpRequest;
 import hello.mong.domain.request.NewDeliveryRequest;
+import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.OrderResponse;
 import hello.mong.service.DeliveryService;
 import hello.mong.utils.JwtProvider;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,19 +33,16 @@ public class DeliveryController {
 
     @PostMapping("/delivery/pick-up")
     public ResponseEntity<OrderResponse> deliveryPickUp(@RequestBody DeliveryPickUpRequest request,
-                                                          HttpServletRequest httpServletRequest) {
-        OrderResponse orderResponse = deliveryService.pickUp(request,httpServletRequest);
+                                                        HttpServletRequest httpServletRequest) {
+        OrderResponse orderResponse = deliveryService.pickUp(request, httpServletRequest);
 
         return new ResponseEntity<>(orderResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/delivery/test")
-    public String deliveryTest(HttpServletRequest request) {
+    @PostMapping("/delivery/can-pick-up")
+    public ResponseEntity<List<AllOrderResponse>> allOrderForDelivery() {
+        List<AllOrderResponse> canPickUpOrders = deliveryService.canPickUpOrders();
 
-        String authorization = request.getHeader("Authorization");
-        String substring = authorization.split(" ")[1].trim();
-        String member = jwtProvider.getMember(substring);
-
-        return member + " 은 delivery 입니다.";
+        return new ResponseEntity<>(canPickUpOrders,HttpStatus.OK);
     }
 }

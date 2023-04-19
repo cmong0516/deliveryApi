@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class AllOrderResponse {
+
+    private Long orderId;
     private String clientName;
     private String clientPhone;
     private String shopName;
@@ -22,8 +24,9 @@ public class AllOrderResponse {
 
 
     @QueryProjection
-    public AllOrderResponse(String clientName, String clientPhone, String shopName, String shopPhone,
+    public AllOrderResponse(Long orderId,String clientName, String clientPhone, String shopName, String shopPhone,
                             String productName, int productPrice, int orderQuantity,String deliveryName, String deliveryPhone, OrderState orderState) {
+        this.orderId = orderId;
         this.clientName = clientName;
         this.clientPhone = clientPhone;
         this.shopName = shopName;

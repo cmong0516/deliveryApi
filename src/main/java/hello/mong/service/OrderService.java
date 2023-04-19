@@ -11,7 +11,9 @@ import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.repository.order.OrderRepositoryCustom;
 import hello.mong.repository.product.ProductJpaRepository;
+import hello.mong.utils.JwtProvider;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,8 +27,21 @@ public class OrderService {
     private final MemberJpaRepository memberJpaRepository;
     private final PasswordEncoder passwordEncoder;
     private final ProductJpaRepository productJpaRepository;
+    private final JwtProvider jwtProvider;
 
-    public NewOrderResponse newOrder(NewOrderRequest request) {
+    public NewOrderResponse newOrder(NewOrderRequest request, HttpServletRequest httpServletRequest) {
+
+
+
+        String authorization = httpServletRequest.getHeader("Authorization");
+
+        String token = authorization.split(" ")[1].trim();
+
+        String memberEmail = jwtProvider.getMember(token);
+
+        if (!request.getEmail().equals(memberEmail)) {
+            throw new RuntimeException();
+        }
 
         Member member = memberJpaRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException(request.getEmail() + " 회원을 찾을수 없습니다."));
