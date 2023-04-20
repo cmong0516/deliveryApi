@@ -26,7 +26,7 @@ public class InitService {
     private final OrderService orderService;
     private final MemberJpaRepository memberJpaRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         initMember();
         initShop();

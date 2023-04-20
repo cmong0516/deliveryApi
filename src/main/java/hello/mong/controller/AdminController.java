@@ -3,9 +3,11 @@ package hello.mong.controller;
 import hello.mong.domain.response.AllDeliveryResponse;
 import hello.mong.domain.response.AllMemberResponse;
 import hello.mong.domain.response.AllOrderResponse;
+import hello.mong.domain.response.NewProductResponse;
 import hello.mong.service.DeliveryService;
 import hello.mong.service.MemberService;
 import hello.mong.service.OrderService;
+import hello.mong.service.ProductService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,7 @@ public class AdminController {
     private final OrderService orderService;
     private final MemberService memberService;
     private final DeliveryService deliveryService;
+    private final ProductService productService;
 
     @GetMapping("/admin/all/order")
     public ResponseEntity<List<AllOrderResponse>> allOrder() {
@@ -44,7 +47,9 @@ public class AdminController {
     }
 
     @GetMapping("/admin/all/product")
-    public void allProduct() {
+    public ResponseEntity<List<NewProductResponse>> allProduct() {
+        List<NewProductResponse> newProductResponses = productService.allProduct();
 
+        return new ResponseEntity<>(newProductResponses, HttpStatus.OK);
     }
 }
