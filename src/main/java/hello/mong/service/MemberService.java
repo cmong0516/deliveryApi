@@ -4,11 +4,13 @@ import hello.mong.domain.entity.Authority;
 import hello.mong.domain.request.NewMemberRequest;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.request.LoginMemberRequest;
+import hello.mong.domain.response.AllMemberResponse;
 import hello.mong.domain.response.SignUpMemberResponse;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.member.MemberRepositoryCustom;
 import hello.mong.utils.JwtProvider;
 import java.util.Collections;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,5 +56,9 @@ public class MemberService {
         }
 
         return jwtProvider.createToken(member.getEmail(),member.getRoles());
+    }
+
+    public List<AllMemberResponse> allMember() {
+        return memberRepositoryCustom.allMember();
     }
 }

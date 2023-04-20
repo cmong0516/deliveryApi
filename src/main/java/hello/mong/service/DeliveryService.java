@@ -7,10 +7,12 @@ import hello.mong.domain.entity.OrderState;
 import hello.mong.domain.entity.Orders;
 import hello.mong.domain.request.DeliveryPickUpRequest;
 import hello.mong.domain.request.NewDeliveryRequest;
+import hello.mong.domain.response.AllDeliveryResponse;
 import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.NewDeliveryResponse;
 import hello.mong.domain.response.OrderResponse;
 import hello.mong.repository.delivery.DeliveryJpaRepository;
+import hello.mong.repository.delivery.DeliveryRepositoryCustom;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.repository.order.OrderRepositoryCustom;
@@ -28,6 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeliveryService {
 
     private final DeliveryJpaRepository deliveryJpaRepository;
+    private final DeliveryRepositoryCustom deliveryRepositoryCustom;
     private final OrderJpaRepository orderJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
     private final JwtProvider jwtProvider;
@@ -112,5 +115,9 @@ public class DeliveryService {
 
     public List<AllOrderResponse> canPickUpOrders() {
         return orderRepositoryCustom.notYetAllOrder();
+    }
+
+    public List<AllDeliveryResponse> allDelivery() {
+        return deliveryRepositoryCustom.allDelivery();
     }
 }

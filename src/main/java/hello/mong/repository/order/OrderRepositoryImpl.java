@@ -6,8 +6,10 @@ import static hello.mong.domain.entity.QOrders.*;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.OrderState;
+import hello.mong.domain.entity.Orders;
 import hello.mong.domain.response.AllOrderResponse;
 import hello.mong.domain.response.QAllOrderResponse;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,5 +52,19 @@ public class OrderRepositoryImpl implements OrderRepositoryCustom {
                 .leftJoin(orders.delivery,delivery)
                 .fetch();
 
+    }
+
+    @Override
+    public List<Long> findByDeliveryId(Long deliveryId) {
+        List<Orders> fetch = jpaQueryFactory.selectFrom(orders)
+                .where(orders.delivery.id.eq(deliveryId))
+                .fetch();
+
+        List<Long> result = new ArrayList<>();
+
+        for (Orders orders : fetch) {
+            result.add(orders.getId());
+        }
+        return result;
     }
 }
