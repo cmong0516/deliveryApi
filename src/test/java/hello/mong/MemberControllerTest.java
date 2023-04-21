@@ -2,22 +2,18 @@ package hello.mong;
 
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.mong.controller.MemberController;
 import hello.mong.domain.request.LoginMemberRequest;
 import hello.mong.domain.request.NewMemberRequest;
-import hello.mong.domain.response.LoginMemberResponse;
-import hello.mong.domain.response.SignUpMemberResponse;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
@@ -47,6 +43,11 @@ public class MemberControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("회원가입에 성공하였습니다."))
+                .andExpect(jsonPath("$.email").value("test@test"))
+                .andExpect(jsonPath("$.name").value("tester"))
+                .andExpect(jsonPath("$.createDate").exists())
+                .andExpect(jsonPath("$.roles[0].name").value("ROLE_USER"))
                 .andDo(print());
     }
 
@@ -68,6 +69,9 @@ public class MemberControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message").value("로그인에 성공하였습니다."))
+                .andExpect(jsonPath("$.email").value("test@test"))
+                .andExpect(jsonPath("$.token").exists())
                 .andDo(print());
 
     }
