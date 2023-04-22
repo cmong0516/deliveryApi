@@ -3,9 +3,8 @@ package hello.mong.repository.member;
 import static hello.mong.domain.entity.QMember.member;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hello.mong.domain.entity.QMember;
-import hello.mong.domain.response.AllMemberResponse;
-import hello.mong.domain.response.QAllMemberResponse;
+import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.member.QAllMemberResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

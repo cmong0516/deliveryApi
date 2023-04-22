@@ -1,4 +1,4 @@
-package hello.mong.domain.response;
+package hello.mong.domain.response.member;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;

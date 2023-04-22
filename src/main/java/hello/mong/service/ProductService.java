@@ -2,8 +2,8 @@ package hello.mong.service;
 
 import hello.mong.domain.entity.CanOrder;
 import hello.mong.domain.entity.Product;
-import hello.mong.domain.request.NewProductRequest;
-import hello.mong.domain.response.NewProductResponse;
+import hello.mong.domain.request.product.NewProductRequest;
+import hello.mong.domain.response.product.NewProductResponse;
 import hello.mong.repository.product.ProductJpaRepository;
 import hello.mong.repository.product.ProductRepositoryCustom;
 import hello.mong.repository.shop.ShopJpaRepository;

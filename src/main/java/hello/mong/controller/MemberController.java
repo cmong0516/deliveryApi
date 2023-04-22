@@ -1,9 +1,9 @@
 package hello.mong.controller;
 
-import hello.mong.domain.request.NewMemberRequest;
-import hello.mong.domain.request.LoginMemberRequest;
-import hello.mong.domain.response.LoginMemberResponse;
-import hello.mong.domain.response.SignUpMemberResponse;
+import hello.mong.domain.request.member.NewMemberRequest;
+import hello.mong.domain.request.member.LoginMemberRequest;
+import hello.mong.domain.response.member.LoginMemberResponse;
+import hello.mong.domain.response.member.SignUpMemberResponse;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
 import javax.validation.Valid;

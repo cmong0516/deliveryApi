@@ -1,4 +1,4 @@
-package hello.mong.domain.response;
+package hello.mong.domain.response.order;
 
 import com.querydsl.core.annotations.QueryProjection;
 import hello.mong.domain.entity.OrderState;

@@ -1,4 +1,4 @@
-package hello.mong.domain.response;
+package hello.mong.domain.response.order;
 
 import hello.mong.domain.entity.OrderState;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package hello.mong.domain.request;
+package hello.mong.domain.request.delivery;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;

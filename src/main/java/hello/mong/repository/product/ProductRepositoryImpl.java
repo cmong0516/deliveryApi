@@ -1,21 +1,22 @@
 package hello.mong.repository.product;
 
 import static hello.mong.domain.entity.QProduct.product;
-import static hello.mong.domain.entity.QShop.shop;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.QProduct;
 import hello.mong.domain.entity.QShop;
-import hello.mong.domain.response.NewProductResponse;
-import hello.mong.domain.response.QNewProductResponse;
+import hello.mong.domain.entity.Shop;
+import hello.mong.domain.response.product.NewProductResponse;
+import hello.mong.domain.response.product.ProductResponse;
+import hello.mong.domain.response.product.QNewProductResponse;
+import hello.mong.domain.response.product.QProductResponse;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductRepositoryImpl implements ProductRepositoryCustom{
+public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
@@ -38,6 +39,15 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom{
                                 product.shop.phone,
                                 product.shop.city))
                 .from(product)
+                .fetch();
+    }
+
+    @Override
+    public List<ProductResponse> productByShop(String shopName) {
+
+        return jpaQueryFactory.select(new QProductResponse(product.name, product.price, product.state))
+                .from(product)
+                .where(product.shop.name.eq(shopName))
                 .fetch();
     }
 }

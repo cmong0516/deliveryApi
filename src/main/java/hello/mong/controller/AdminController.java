@@ -1,9 +1,9 @@
 package hello.mong.controller;
 
-import hello.mong.domain.response.AllDeliveryResponse;
-import hello.mong.domain.response.AllMemberResponse;
-import hello.mong.domain.response.AllOrderResponse;
-import hello.mong.domain.response.NewProductResponse;
+import hello.mong.domain.response.delivery.AllDeliveryResponse;
+import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.order.AllOrderResponse;
+import hello.mong.domain.response.product.NewProductResponse;
 import hello.mong.service.DeliveryService;
 import hello.mong.service.MemberService;
 import hello.mong.service.OrderService;

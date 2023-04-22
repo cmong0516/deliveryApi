@@ -1,4 +1,4 @@
-package hello.mong.domain.response;
+package hello.mong.domain.response.delivery;
 
 import com.querydsl.core.annotations.QueryProjection;
 import java.util.List;

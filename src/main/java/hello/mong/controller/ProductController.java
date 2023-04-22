@@ -1,7 +1,7 @@
 package hello.mong.controller;
 
-import hello.mong.domain.request.NewProductRequest;
-import hello.mong.domain.response.NewProductResponse;
+import hello.mong.domain.request.product.NewProductRequest;
+import hello.mong.domain.response.product.NewProductResponse;
 import hello.mong.service.ProductService;
 import java.util.List;
 import javax.validation.Valid;

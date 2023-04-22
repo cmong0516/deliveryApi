@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.mong.controller.MemberController;
-import hello.mong.domain.request.LoginMemberRequest;
-import hello.mong.domain.request.NewMemberRequest;
+import hello.mong.domain.request.member.LoginMemberRequest;
+import hello.mong.domain.request.member.NewMemberRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

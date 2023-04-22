@@ -1,8 +1,10 @@
 package hello.mong.controller;
 
-import hello.mong.domain.request.NewShopRequest;
-import hello.mong.domain.response.NewShopResponse;
+import hello.mong.domain.request.shop.NewShopRequest;
+import hello.mong.domain.response.shop.NewShopResponse;
+import hello.mong.domain.response.shop.ShopListById;
 import hello.mong.service.ShopService;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +24,12 @@ public class ShopController {
         NewShopResponse newShopResponse = shopService.newShop(request,httpServletRequest);
 
         return new ResponseEntity<>(newShopResponse, HttpStatus.OK);
+    }
+
+    @PostMapping("/shop/my")
+    public ResponseEntity<List<ShopListById>> myShop(HttpServletRequest httpServletRequest) {
+        List<ShopListById> shopListByIds = shopService.shopListByMember(httpServletRequest);
+
+        return new ResponseEntity<>(shopListByIds,HttpStatus.OK);
     }
 }

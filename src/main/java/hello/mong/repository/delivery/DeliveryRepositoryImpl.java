@@ -4,8 +4,8 @@ import static hello.mong.domain.entity.QDelivery.delivery;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Delivery;
-import hello.mong.domain.response.AllDeliveryResponse;
-import hello.mong.domain.response.QAllDeliveryResponse;
+import hello.mong.domain.response.delivery.AllDeliveryResponse;
+import hello.mong.domain.response.delivery.QAllDeliveryResponse;
 import hello.mong.repository.order.OrderRepositoryCustom;
 import java.util.List;
 import java.util.Optional;

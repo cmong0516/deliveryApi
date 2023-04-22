@@ -1,4 +1,4 @@
-package hello.mong.domain.response;
+package hello.mong.domain.response.shop;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

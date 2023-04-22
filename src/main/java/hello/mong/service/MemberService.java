@@ -1,11 +1,11 @@
 package hello.mong.service;
 
 import hello.mong.domain.entity.Authority;
-import hello.mong.domain.request.NewMemberRequest;
+import hello.mong.domain.request.member.NewMemberRequest;
 import hello.mong.domain.entity.Member;
-import hello.mong.domain.request.LoginMemberRequest;
-import hello.mong.domain.response.AllMemberResponse;
-import hello.mong.domain.response.SignUpMemberResponse;
+import hello.mong.domain.request.member.LoginMemberRequest;
+import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.member.SignUpMemberResponse;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.member.MemberRepositoryCustom;
 import hello.mong.utils.JwtProvider;

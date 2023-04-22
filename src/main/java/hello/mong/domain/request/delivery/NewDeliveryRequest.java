@@ -1,21 +1,19 @@
-package hello.mong.domain.request;
+package hello.mong.domain.request.delivery;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewOrderRequest {
+@Builder
+public class NewDeliveryRequest {
+
     @NotEmpty
     private String email;
     @NotEmpty
     private String password;
-    @NotEmpty
-    private String productName;
-    @NotNull
-    private int productQuantity;
 }

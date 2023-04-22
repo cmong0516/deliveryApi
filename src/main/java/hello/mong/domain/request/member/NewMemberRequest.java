@@ -1,4 +1,4 @@
-package hello.mong.domain.request;
+package hello.mong.domain.request.member;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;

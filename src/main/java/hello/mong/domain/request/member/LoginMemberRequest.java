@@ -1,17 +1,12 @@
-package hello.mong.domain.request;
+package hello.mong.domain.request.member;
 
 import javax.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class NewDeliveryRequest {
-
+public class LoginMemberRequest {
     @NotEmpty
     private String email;
     @NotEmpty

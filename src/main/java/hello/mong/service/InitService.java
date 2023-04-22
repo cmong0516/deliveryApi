@@ -3,17 +3,14 @@ package hello.mong.service;
 import hello.mong.domain.entity.Authority;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.entity.Shop;
-import hello.mong.domain.request.NewDeliveryRequest;
-import hello.mong.domain.request.NewMemberRequest;
-import hello.mong.domain.request.NewProductRequest;
-import hello.mong.domain.request.NewShopRequest;
+import hello.mong.domain.request.member.NewMemberRequest;
+import hello.mong.domain.request.product.NewProductRequest;
+import hello.mong.domain.request.shop.NewShopRequest;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.shop.ShopJpaRepository;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -105,7 +102,7 @@ public class InitService {
     }
 
     public void initProduct() {
-        for (int i = 0; i < 200; i++) {
+        for (int i = 1; i <= 200; i++) {
             NewProductRequest request = NewProductRequest.builder()
                     .productName("product" + i)
                     .productPrice((int) (Math.random() * 10000) + 1)

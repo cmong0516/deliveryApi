@@ -1,7 +1,6 @@
 package hello.mong.repository.order;
 
-import hello.mong.domain.entity.Orders;
-import hello.mong.domain.response.AllOrderResponse;
+import hello.mong.domain.response.order.AllOrderResponse;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 

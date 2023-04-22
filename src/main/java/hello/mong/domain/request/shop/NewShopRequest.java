@@ -1,4 +1,4 @@
-package hello.mong.domain.request;
+package hello.mong.domain.request.shop;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NewProductRequest {
+public class NewShopRequest {
 
     @NotEmpty
-    private String productName;
-    @NotEmpty
-    private int productPrice;
-    @NotEmpty
     private String shopName;
+    @NotEmpty
+    private String shopPhone;
+    @NotEmpty
+    private String city;
 }
