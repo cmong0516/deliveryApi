@@ -3,6 +3,7 @@ package hello.mong.controller;
 import hello.mong.domain.request.NewShopRequest;
 import hello.mong.domain.response.NewShopResponse;
 import hello.mong.service.ShopService;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,8 @@ public class ShopController {
     private final ShopService shopService;
 
     @PostMapping("/shop/new")
-    public ResponseEntity<NewShopResponse> newShop(@Valid @RequestBody NewShopRequest request) {
-        NewShopResponse newShopResponse = shopService.newShop(request);
+    public ResponseEntity<NewShopResponse> newShop(@Valid @RequestBody NewShopRequest request, HttpServletRequest httpServletRequest) {
+        NewShopResponse newShopResponse = shopService.newShop(request,httpServletRequest);
 
         return new ResponseEntity<>(newShopResponse, HttpStatus.OK);
     }

@@ -34,9 +34,17 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Authority> roles = new ArrayList<>();
 
+    @OneToMany
+    private List<Shop> shops = new ArrayList<>();
+
     public void setRoles(List<Authority> role) {
         this.roles = role;
         role.forEach(o -> o.setMember(this));
+    }
+
+    public void setShops(Shop shop) {
+        this.shops.add(shop);
+        shop.setMaster(this);
     }
 
 }

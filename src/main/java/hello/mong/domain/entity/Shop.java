@@ -39,6 +39,10 @@ public class Shop extends BaseTimeEntity {
         this.products.add(product);
         product.setShop(this);
     }
+
+    public void setMaster(Member master) {
+        this.master = master;
+    }
 }
 
 // Jwt 토큰의 member 를 조회하여 Shop 을 등록할때 Member Type 의 master 를 설정해야함 .

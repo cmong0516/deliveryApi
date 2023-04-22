@@ -2,13 +2,18 @@ package hello.mong.service;
 
 import hello.mong.domain.entity.Authority;
 import hello.mong.domain.entity.Member;
+import hello.mong.domain.entity.Shop;
 import hello.mong.domain.request.NewDeliveryRequest;
 import hello.mong.domain.request.NewMemberRequest;
 import hello.mong.domain.request.NewProductRequest;
 import hello.mong.domain.request.NewShopRequest;
 import hello.mong.repository.member.MemberJpaRepository;
+import hello.mong.repository.shop.ShopJpaRepository;
 import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,8 +30,9 @@ public class InitService {
     private final ProductService productService;
     private final OrderService orderService;
     private final MemberJpaRepository memberJpaRepository;
+    private final ShopJpaRepository shopJpaRepository;
 
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         initMember();
         initShop();
@@ -36,7 +42,7 @@ public class InitService {
 
     @Transactional
     public void initMember() {
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i <= 50; i++) {
             NewMemberRequest request = NewMemberRequest.builder()
                     .email("user" + i+"@mong.com")
                     .password("123123")
@@ -68,15 +74,33 @@ public class InitService {
     }
 
 
-
+    @Transactional
     public void initShop() {
+
+        Random random = new Random();
+
         for (int i = 0; i < 30; i++) {
+
+            Member member = memberJpaRepository.findByEmail(
+                            "user" + (random.nextInt(50) + 1) + "@mong.com")
+                    .orElseThrow(() -> new RuntimeException("InitShop Error"));
+
             NewShopRequest request = NewShopRequest.builder()
                     .shopName("shop" + i)
                     .shopPhone("02-0000-" + i)
                     .city("seoul")
                     .build();
-            shopService.newShop(request);
+
+            Shop shop = Shop.builder()
+                    .name(request.getShopName())
+                    .phone(request.getShopPhone())
+                    .city(request.getCity())
+                    .build();
+
+            shop.setMaster(member);
+
+            shopJpaRepository.save(shop);
+
         }
     }
 
