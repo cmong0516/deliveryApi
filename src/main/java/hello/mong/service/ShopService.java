@@ -66,14 +66,6 @@ public class ShopService {
         Member member = memberJpaRepository.findByEmail(memberEmail)
                 .orElseThrow(() -> new IllegalStateException("잘못된 회원정보 입니다."));
 
-        List<ShopListById> shopListById = shopRepositoryCustom.shopListByMember(member);
-
-
-
-        for (ShopListById listById : shopListById) {
-            listById.setProducts(productRepositoryCustom.productByShop(listById.getShopName()));
-        }
-
-        return shopListById;
+        return shopRepositoryCustom.shopListByMember(member);
     }
 }
