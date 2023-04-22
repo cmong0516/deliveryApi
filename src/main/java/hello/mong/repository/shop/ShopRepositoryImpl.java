@@ -6,6 +6,7 @@ import static hello.mong.domain.entity.QShop.shop;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Member;
+import hello.mong.domain.entity.QMember;
 import hello.mong.domain.response.product.QProductResponse;
 import hello.mong.domain.response.shop.QShopListById;
 import hello.mong.domain.response.shop.ShopListById;
@@ -31,6 +32,7 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
             listById.setProducts(
                     jpaQueryFactory.select(new QProductResponse(product.name, product.price, product.state))
                             .from(product)
+                            .join(shop.master, QMember.member)
                             .where(product.shop.name.eq(listById.getShopName()))
                             .fetch()
             );

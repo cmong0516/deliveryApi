@@ -3,9 +3,7 @@ package hello.mong.repository.product;
 import static hello.mong.domain.entity.QProduct.product;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import hello.mong.domain.entity.QProduct;
 import hello.mong.domain.entity.QShop;
-import hello.mong.domain.entity.Shop;
 import hello.mong.domain.response.product.NewProductResponse;
 import hello.mong.domain.response.product.ProductResponse;
 import hello.mong.domain.response.product.QNewProductResponse;
@@ -39,6 +37,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                                 product.shop.phone,
                                 product.shop.city))
                 .from(product)
+                .join(product.shop,QShop.shop)
                 .fetch();
     }
 
