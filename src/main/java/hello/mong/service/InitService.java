@@ -6,9 +6,9 @@ import hello.mong.domain.entity.Shop;
 import hello.mong.domain.request.member.NewMemberRequest;
 import hello.mong.domain.request.product.NewProductRequest;
 import hello.mong.domain.request.shop.NewShopRequest;
-import hello.mong.repository.authority.AuthorityJpaRepository;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.shop.ShopJpaRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.PostConstruct;
@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Transactional
 public class InitService {
 
     private final MemberService memberService;
@@ -29,23 +30,17 @@ public class InitService {
     private final OrderService orderService;
     private final MemberJpaRepository memberJpaRepository;
     private final ShopJpaRepository shopJpaRepository;
-    private final AuthorityJpaRepository authorityJpaRepository;
+
 
     @PostConstruct
     public void init() {
+        initAdmin();
         initMember();
         initShop();
         initProduct();
-        authorityInit();
 
     }
 
-    @Transactional
-    public void authorityInit() {
-        authorityJpaRepository.save(Authority.builder().name("ROLE_ADMIN").build());
-        authorityJpaRepository.save(Authority.builder().name("ROLE_USER").build());
-        authorityJpaRepository.save(Authority.builder().name("ROLE_DELIVERY").build());
-    }
 
     @Transactional
     public void initMember() {
@@ -59,6 +54,12 @@ public class InitService {
             memberService.signUp(request);
         }
 
+
+
+    }
+
+    public void initAdmin() {
+
         NewMemberRequest admin = NewMemberRequest.builder()
                 .email("cmong0516@gmail.com")
                 .password("123123")
@@ -70,7 +71,7 @@ public class InitService {
 
         Member adminMember = memberJpaRepository.findByEmail("cmong0516@gmail.com").get();
 
-        List<Authority> roles = adminMember.getRoles();
+        List<Authority> roles = new ArrayList<>();
 
         roles.add(Authority.builder().name("ROLE_ADMIN").build());
         roles.add(Authority.builder().name("ROLE_DELIVERY").build());
@@ -80,8 +81,6 @@ public class InitService {
         memberJpaRepository.save(adminMember);
     }
 
-
-    @Transactional
     public void initShop() {
 
         Random random = new Random();

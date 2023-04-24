@@ -16,6 +16,7 @@ import hello.mong.domain.response.shop.QShopListById;
 import hello.mong.domain.response.shop.ShopListById;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -50,6 +51,8 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
 
         return jpaQueryFactory
                 .selectFrom(shop)
+                .join(shop.master, member)
+                .fetchJoin()
                 .fetch();
     }
 }

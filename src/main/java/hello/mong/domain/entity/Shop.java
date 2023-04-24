@@ -4,6 +4,7 @@ import hello.mong.auditing.BaseTimeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Shop extends BaseTimeEntity {
     private String phone;
     private String city;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member master;
 
     @OneToMany(mappedBy = "shop")

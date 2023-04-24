@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
@@ -26,7 +27,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    @Transactional
+
     public SignUpMemberResponse signUp(NewMemberRequest newMemberRequest) {
 
         if (memberJpaRepository.findByEmail(newMemberRequest.getEmail()).isPresent()) {
