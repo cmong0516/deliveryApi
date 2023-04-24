@@ -4,10 +4,12 @@ import hello.mong.domain.response.delivery.AllDeliveryResponse;
 import hello.mong.domain.response.member.AllMemberResponse;
 import hello.mong.domain.response.order.AllOrderResponse;
 import hello.mong.domain.response.product.NewProductResponse;
+import hello.mong.domain.response.shop.AllShopResponse;
 import hello.mong.service.DeliveryService;
 import hello.mong.service.MemberService;
 import hello.mong.service.OrderService;
 import hello.mong.service.ProductService;
+import hello.mong.service.ShopService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,7 @@ public class AdminController {
     private final MemberService memberService;
     private final DeliveryService deliveryService;
     private final ProductService productService;
+    private final ShopService shopService;
 
     @GetMapping("/admin/all/order")
     public ResponseEntity<List<AllOrderResponse>> allOrder() {
@@ -51,5 +54,12 @@ public class AdminController {
         List<NewProductResponse> newProductResponses = productService.allProduct();
 
         return new ResponseEntity<>(newProductResponses, HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/all/shop")
+    public ResponseEntity<List<AllShopResponse>> allShop() {
+        List<AllShopResponse> allShopResponses = shopService.allShop();
+
+        return new ResponseEntity<>(allShopResponses,HttpStatus.OK);
     }
 }

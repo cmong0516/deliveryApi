@@ -3,6 +3,8 @@ package hello.mong.service;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.entity.Shop;
 import hello.mong.domain.request.shop.NewShopRequest;
+import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.shop.AllShopResponse;
 import hello.mong.domain.response.shop.NewShopResponse;
 import hello.mong.domain.response.shop.ShopListById;
 import hello.mong.repository.member.MemberJpaRepository;
@@ -10,6 +12,7 @@ import hello.mong.repository.product.ProductRepositoryCustom;
 import hello.mong.repository.shop.ShopJpaRepository;
 import hello.mong.repository.shop.ShopRepositoryCustom;
 import hello.mong.utils.JwtProvider;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -67,5 +70,30 @@ public class ShopService {
                 .orElseThrow(() -> new IllegalStateException("잘못된 회원정보 입니다."));
 
         return shopRepositoryCustom.shopListByMember(member);
+    }
+
+    public List<AllShopResponse> allShop() {
+        List<AllShopResponse> result = new ArrayList<>();
+
+        List<Shop> shops = shopRepositoryCustom.allShop();
+
+        for (Shop shop : shops) {
+            AllShopResponse allShopResponse = AllShopResponse.builder()
+                    .shopId(shop.getId())
+                    .shopName(shop.getName())
+                    .shopPhone(shop.getPhone())
+                    .city(shop.getCity())
+                    .master(
+                            AllMemberResponse.builder()
+                                    .id(shop.getMaster().getId())
+                                    .email(shop.getMaster().getEmail())
+                                    .username(shop.getMaster().getName())
+                                    .phone(shop.getMaster().getPhone()).build())
+                    .build();
+
+            result.add(allShopResponse);
+        }
+
+        return result;
     }
 }

@@ -1,5 +1,6 @@
 package hello.mong.repository.shop;
 
+import static hello.mong.domain.entity.QMember.member;
 import static hello.mong.domain.entity.QProduct.product;
 import static hello.mong.domain.entity.QShop.shop;
 
@@ -7,6 +8,9 @@ import static hello.mong.domain.entity.QShop.shop;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.entity.QMember;
+import hello.mong.domain.entity.QProduct;
+import hello.mong.domain.entity.QShop;
+import hello.mong.domain.entity.Shop;
 import hello.mong.domain.response.product.QProductResponse;
 import hello.mong.domain.response.shop.QShopListById;
 import hello.mong.domain.response.shop.ShopListById;
@@ -39,5 +43,14 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
         }
 
         return shopListById;
+    }
+
+    @Override
+    public List<Shop> allShop() {
+
+        return jpaQueryFactory.selectFrom(shop)
+                .leftJoin(shop.master, member)
+                .leftJoin(shop.products, product)
+                .fetch();
     }
 }
