@@ -6,6 +6,7 @@ import hello.mong.domain.entity.Shop;
 import hello.mong.domain.request.member.NewMemberRequest;
 import hello.mong.domain.request.product.NewProductRequest;
 import hello.mong.domain.request.shop.NewShopRequest;
+import hello.mong.repository.authority.AuthorityJpaRepository;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.shop.ShopJpaRepository;
 import java.util.List;
@@ -28,13 +29,22 @@ public class InitService {
     private final OrderService orderService;
     private final MemberJpaRepository memberJpaRepository;
     private final ShopJpaRepository shopJpaRepository;
+    private final AuthorityJpaRepository authorityJpaRepository;
 
     @PostConstruct
     public void init() {
         initMember();
         initShop();
         initProduct();
+        authorityInit();
 
+    }
+
+    @Transactional
+    public void authorityInit() {
+        authorityJpaRepository.save(Authority.builder().name("ROLE_ADMIN").build());
+        authorityJpaRepository.save(Authority.builder().name("ROLE_USER").build());
+        authorityJpaRepository.save(Authority.builder().name("ROLE_DELIVERY").build());
     }
 
     @Transactional

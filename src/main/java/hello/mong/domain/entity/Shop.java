@@ -29,6 +29,7 @@ public class Shop extends BaseTimeEntity {
     private String name;
     private String phone;
     private String city;
+
     @ManyToOne
     private Member master;
 

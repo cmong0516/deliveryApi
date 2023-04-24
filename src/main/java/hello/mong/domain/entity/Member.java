@@ -37,9 +37,9 @@ public class Member extends BaseTimeEntity {
     @OneToMany
     private List<Shop> shops = new ArrayList<>();
 
-    public void setRoles(List<Authority> role) {
-        this.roles = role;
-        role.forEach(o -> o.setMember(this));
+    public void setRoles(List<Authority> roles) {
+        this.roles = roles;
+        roles.forEach(o -> o.setMember(this));
     }
 
     public void setShops(Shop shop) {
