@@ -34,7 +34,7 @@ public class Shop extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member master;
 
-    @OneToMany(mappedBy = "shop")
+    @OneToMany(mappedBy = "shop",fetch = FetchType.LAZY)
     private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product product) {

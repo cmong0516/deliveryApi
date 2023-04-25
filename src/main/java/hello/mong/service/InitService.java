@@ -85,7 +85,7 @@ public class InitService {
 
         Random random = new Random();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 1; i <= 30; i++) {
 
             Member member = memberJpaRepository.findByEmail(
                             "user" + (random.nextInt(50) + 1) + "@mong.com")
