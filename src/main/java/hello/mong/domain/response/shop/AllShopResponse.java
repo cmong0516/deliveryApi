@@ -1,6 +1,7 @@
 package hello.mong.domain.response.shop;
 
 import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.product.ProductResponse;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,6 @@ public class AllShopResponse {
     private String shopPhone;
     private String city;
     private AllMemberResponse master;
+    private List<ProductResponse> product;
+
 }

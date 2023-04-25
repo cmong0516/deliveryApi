@@ -9,6 +9,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Member;
 import hello.mong.domain.entity.QMember;
+import hello.mong.domain.entity.QProduct;
 import hello.mong.domain.entity.Shop;
 import hello.mong.domain.response.product.QProductResponse;
 import hello.mong.domain.response.shop.QShopListById;
@@ -49,17 +50,11 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
 
         return jpaQueryFactory
                 .selectFrom(shop)
-                .leftJoin(shop.master, member)
+                .join(shop.master, member)
                 .fetchJoin()
-                .select(Projections.constructor(Shop.class, shop.id, shop.name, shop.phone, shop.city,
-                        Projections.constructor(Member.class, member.id, member.email, member.name, member.password, member.phone)))
+                .join(shop.products, product)
+                .fetchJoin()
                 .fetch();
-
-//        return jpaQueryFactory
-//                .selectFrom(shop)
-//                .join(shop.master, member)
-//                .fetchJoin()
-//                .fetch();
     }
 
 

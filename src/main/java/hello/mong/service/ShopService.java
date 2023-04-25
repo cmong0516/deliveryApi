@@ -1,9 +1,11 @@
 package hello.mong.service;
 
 import hello.mong.domain.entity.Member;
+import hello.mong.domain.entity.Product;
 import hello.mong.domain.entity.Shop;
 import hello.mong.domain.request.shop.NewShopRequest;
 import hello.mong.domain.response.member.AllMemberResponse;
+import hello.mong.domain.response.product.ProductResponse;
 import hello.mong.domain.response.shop.AllShopResponse;
 import hello.mong.domain.response.shop.NewShopResponse;
 import hello.mong.domain.response.shop.ShopListById;
@@ -14,6 +16,7 @@ import hello.mong.repository.shop.ShopRepositoryCustom;
 import hello.mong.utils.JwtProvider;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -78,6 +81,9 @@ public class ShopService {
         List<Shop> shops = shopRepositoryCustom.allShop();
 
         for (Shop shop : shops) {
+
+
+
             AllShopResponse allShopResponse = AllShopResponse.builder()
                     .shopId(shop.getId())
                     .shopName(shop.getName())
@@ -89,6 +95,14 @@ public class ShopService {
                                     .email(shop.getMaster().getEmail())
                                     .username(shop.getMaster().getName())
                                     .phone(shop.getMaster().getPhone()).build())
+                    .product(
+                            shop.getProducts().stream().map(product -> ProductResponse.builder()
+                                    .productName(product.getName())
+                                    .productPrice(product.getPrice())
+                                    .canOrderState(product.getState())
+                                    .build())
+                                    .collect(Collectors.toList())
+                    )
                     .build();
 
             result.add(allShopResponse);
