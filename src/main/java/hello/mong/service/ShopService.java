@@ -19,10 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ShopService {
     private final ShopJpaRepository shopJpaRepository;
     private final ShopRepositoryCustom shopRepositoryCustom;
@@ -80,9 +82,16 @@ public class ShopService {
 
         List<Shop> shops = shopRepositoryCustom.allShop();
 
+        log.info("shops.size() = {}" , shops.size());
+
         for (Shop shop : shops) {
 
-
+            List<ProductResponse> products = shop.getProducts().stream().map(product -> ProductResponse.builder()
+                            .productName(product.getName())
+                            .productPrice(product.getPrice())
+                            .canOrderState(product.getState())
+                            .build())
+                    .collect(Collectors.toList());
 
             AllShopResponse allShopResponse = AllShopResponse.builder()
                     .shopId(shop.getId())
@@ -95,14 +104,7 @@ public class ShopService {
                                     .email(shop.getMaster().getEmail())
                                     .username(shop.getMaster().getName())
                                     .phone(shop.getMaster().getPhone()).build())
-                    .product(
-                            shop.getProducts().stream().map(product -> ProductResponse.builder()
-                                    .productName(product.getName())
-                                    .productPrice(product.getPrice())
-                                    .canOrderState(product.getState())
-                                    .build())
-                                    .collect(Collectors.toList())
-                    )
+                    .product(products)
                     .build();
 
             result.add(allShopResponse);

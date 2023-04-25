@@ -51,10 +51,11 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
     public List<Shop> allShop() {
 
         return jpaQueryFactory
-                .selectFrom(shop)
-                .join(shop.master, member)
+                .selectDistinct(shop)
+                .from(shop)
+                .leftJoin(shop.master, member)
                 .fetchJoin()
-                .join(shop.products, product)
+                .leftJoin(shop.products, product)
                 .fetchJoin()
                 .orderBy(shop.id.asc())
                 .fetch();

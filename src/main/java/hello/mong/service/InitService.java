@@ -92,8 +92,8 @@ public class InitService {
                     .orElseThrow(() -> new RuntimeException("InitShop Error"));
 
             NewShopRequest request = NewShopRequest.builder()
-                    .shopName("shop" + i)
-                    .shopPhone("02-0000-" + i)
+                    .shopName(("shop" + i))
+                    .shopPhone(("02-000-" + i))
                     .city("seoul")
                     .build();
 
@@ -126,7 +126,7 @@ public class InitService {
             return i;
         }
 
-        i -= 30;
+        i -= 29;
         return shopNum(i);
     }
 }
