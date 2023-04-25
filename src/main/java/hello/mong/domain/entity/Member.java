@@ -47,4 +47,13 @@ public class Member extends BaseTimeEntity {
         shop.setMaster(this);
     }
 
+    public Member(Long id, String email, String name, String password, String phone,
+                  List<Shop> shops) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.shops = shops;
+    }
 }

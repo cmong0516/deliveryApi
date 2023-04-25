@@ -11,6 +11,7 @@ import hello.mong.service.OrderService;
 import hello.mong.service.ProductService;
 import hello.mong.service.ShopService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,5 +62,11 @@ public class AdminController {
         List<AllShopResponse> allShopResponses = shopService.allShop();
 
         return new ResponseEntity<>(allShopResponses,HttpStatus.OK);
+    }
+
+    @GetMapping("/admin/test")
+    public String adminTest() {
+
+        return "admin 입니다.";
     }
 }

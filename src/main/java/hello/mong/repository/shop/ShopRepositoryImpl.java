@@ -1,14 +1,13 @@
 package hello.mong.repository.shop;
 
-import static hello.mong.domain.entity.QAuthority.*;
 import static hello.mong.domain.entity.QMember.member;
 import static hello.mong.domain.entity.QProduct.product;
 import static hello.mong.domain.entity.QShop.shop;
 
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Member;
-import hello.mong.domain.entity.QAuthority;
 import hello.mong.domain.entity.QMember;
 import hello.mong.domain.entity.Shop;
 import hello.mong.domain.response.product.QProductResponse;
@@ -16,7 +15,6 @@ import hello.mong.domain.response.shop.QShopListById;
 import hello.mong.domain.response.shop.ShopListById;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -51,8 +49,18 @@ public class ShopRepositoryImpl implements ShopRepositoryCustom {
 
         return jpaQueryFactory
                 .selectFrom(shop)
-                .join(shop.master, member)
+                .leftJoin(shop.master, member)
                 .fetchJoin()
+                .select(Projections.constructor(Shop.class, shop.id, shop.name, shop.phone, shop.city,
+                        Projections.constructor(Member.class, member.id, member.email, member.name, member.password, member.phone)))
                 .fetch();
+
+//        return jpaQueryFactory
+//                .selectFrom(shop)
+//                .join(shop.master, member)
+//                .fetchJoin()
+//                .fetch();
     }
+
+
 }
