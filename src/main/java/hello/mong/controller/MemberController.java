@@ -6,6 +6,7 @@ import hello.mong.domain.request.member.LoginMemberRequest;
 import hello.mong.domain.response.member.LoginMemberResponse;
 import hello.mong.domain.response.member.SignUpMemberResponse;
 import hello.mong.repository.member.MemberJpaRepository;
+import hello.mong.repository.member.MemberRepositoryCustom;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class MemberController {
     private final MemberService memberService;
     private final JwtProvider jwtProvider;
     private final MemberJpaRepository memberJpaRepository;
+    private final MemberRepositoryCustom memberRepositoryCustom;
 
     @PostMapping("/member/new")
     public ResponseEntity<SignUpMemberResponse> createMember(@Valid @RequestBody NewMemberRequest newMemberRequest) {
@@ -40,7 +42,9 @@ public class MemberController {
 
         String member = jwtProvider.getMember(token);
 
-        Member loginMember = memberJpaRepository.findByEmail(member).orElseThrow();
+        log.info(member);
+
+        Member loginMember = memberRepositoryCustom.findByEmail(member).orElseThrow();
 
         return new ResponseEntity<>(new LoginMemberResponse("로그인에 성공하였습니다.", request.getEmail(),loginMember.getRoles(), token), HttpStatus.OK);
     }

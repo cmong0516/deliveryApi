@@ -33,7 +33,7 @@ public class Member extends BaseTimeEntity {
     private String password;
     private String phone;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private Set<Authority> roles = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)

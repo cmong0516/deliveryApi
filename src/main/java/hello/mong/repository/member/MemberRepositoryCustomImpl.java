@@ -29,9 +29,9 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     public Optional<Member> findByEmail(String email) {
 
         return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
-                        .where(member.email.eq(email))
-                .join(member.roles, authority)
+                .leftJoin(member.roles, authority)
                 .fetchJoin()
+                .where(member.email.eq(email))
                 .fetchOne());
 
     }

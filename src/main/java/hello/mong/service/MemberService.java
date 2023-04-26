@@ -6,10 +6,10 @@ import hello.mong.domain.entity.Member;
 import hello.mong.domain.request.member.LoginMemberRequest;
 import hello.mong.domain.response.member.AllMemberResponse;
 import hello.mong.domain.response.member.SignUpMemberResponse;
+import hello.mong.repository.authority.AuthorityJpaRepository;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.member.MemberRepositoryCustom;
 import hello.mong.utils.JwtProvider;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,6 +28,7 @@ public class MemberService {
     private final MemberRepositoryCustom memberRepositoryCustom;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final AuthorityJpaRepository authorityJpaRepository;
 
 
     public SignUpMemberResponse signUp(NewMemberRequest newMemberRequest) {
@@ -45,7 +46,10 @@ public class MemberService {
 
         Set<Authority> set = new HashSet<>();
 
-        set.add(Authority.builder().name("ROLE_USER").build());
+        Authority role_user = authorityJpaRepository.findByName("ROLE_USER")
+                .orElseThrow();
+
+        set.add(role_user);
 
         member.setRoles(set);
 
