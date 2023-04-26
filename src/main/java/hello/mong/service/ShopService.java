@@ -82,7 +82,6 @@ public class ShopService {
 
         List<Shop> shops = shopRepositoryCustom.allShop();
 
-        log.info("shops.size() = {}" , shops.size());
 
         for (Shop shop : shops) {
 
