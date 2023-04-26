@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class JwtProvider {
         key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createToken(String username, List<Authority> roles) {
+    public String createToken(String username, Set<Authority> roles) {
         // username , role 을 받아 토큰 생성
         Claims claims = Jwts.claims().setSubject(username);
         // jjwt library 를 사용하여 claims 를 생성하고 setSubject(username)

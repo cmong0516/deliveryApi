@@ -2,7 +2,9 @@ package hello.mong.domain.entity;
 
 import hello.mong.auditing.BaseTimeEntity;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,13 +33,13 @@ public class Member extends BaseTimeEntity {
     private String password;
     private String phone;
 
-    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Authority> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Authority> roles = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Shop> shops = new ArrayList<>();
 
-    public void setRoles(List<Authority> roles) {
+    public void setRoles(Set<Authority> roles) {
         this.roles = roles;
         roles.forEach(o -> o.setMember(this));
     }

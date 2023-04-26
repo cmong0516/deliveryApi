@@ -45,4 +45,10 @@ public class DeliveryController {
 
         return new ResponseEntity<>(canPickUpOrders,HttpStatus.OK);
     }
+
+    @PostMapping("/delivery/Complete")
+    public void completeDelivery() {
+
+    }
+
 }

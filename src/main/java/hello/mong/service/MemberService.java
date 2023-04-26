@@ -10,7 +10,9 @@ import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.member.MemberRepositoryCustom;
 import hello.mong.utils.JwtProvider;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -41,7 +43,11 @@ public class MemberService {
                 .phone(newMemberRequest.getPhone())
                 .build();
 
-        member.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
+        Set<Authority> set = new HashSet<>();
+
+        set.add(Authority.builder().name("ROLE_USER").build());
+
+        member.setRoles(set);
 
         memberJpaRepository.save(member);
 

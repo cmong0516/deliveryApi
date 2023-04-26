@@ -9,8 +9,10 @@ import hello.mong.domain.request.shop.NewShopRequest;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.repository.shop.ShopJpaRepository;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +73,7 @@ public class InitService {
 
         Member adminMember = memberJpaRepository.findByEmail("cmong0516@gmail.com").get();
 
-        List<Authority> roles = new ArrayList<>();
+        Set<Authority> roles = new HashSet<>();
 
         roles.add(Authority.builder().name("ROLE_ADMIN").build());
         roles.add(Authority.builder().name("ROLE_DELIVERY").build());

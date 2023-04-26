@@ -8,7 +8,6 @@ import hello.mong.domain.response.member.SignUpMemberResponse;
 import hello.mong.repository.member.MemberJpaRepository;
 import hello.mong.service.MemberService;
 import hello.mong.utils.JwtProvider;
-import java.util.Optional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

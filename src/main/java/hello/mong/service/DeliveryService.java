@@ -18,6 +18,7 @@ import hello.mong.repository.order.OrderJpaRepository;
 import hello.mong.repository.order.OrderRepositoryCustom;
 import hello.mong.utils.JwtProvider;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +54,9 @@ public class DeliveryService {
         Member member = memberJpaRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException(email + " 유저를 찾을수 없습니다."));
 
-        List<Authority> roles = member.getRoles();
+        Set<Authority> roles = member.getRoles();
 
-        roles.add(roles.size(), Authority.builder().name("ROLE_DELIVERY").build());
+        roles.add(Authority.builder().name("ROLE_DELIVERY").build());
 
         member.setRoles(roles);
 
