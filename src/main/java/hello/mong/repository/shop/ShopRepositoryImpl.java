@@ -1,17 +1,12 @@
 package hello.mong.repository.shop;
 
-import static hello.mong.domain.entity.QAuthority.authority;
 import static hello.mong.domain.entity.QMember.member;
 import static hello.mong.domain.entity.QProduct.product;
 import static hello.mong.domain.entity.QShop.shop;
 
-
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import hello.mong.domain.entity.Member;
-import hello.mong.domain.entity.QAuthority;
 import hello.mong.domain.entity.QMember;
-import hello.mong.domain.entity.QProduct;
 import hello.mong.domain.entity.Shop;
 import hello.mong.domain.response.product.QProductResponse;
 import hello.mong.domain.response.shop.QShopListById;

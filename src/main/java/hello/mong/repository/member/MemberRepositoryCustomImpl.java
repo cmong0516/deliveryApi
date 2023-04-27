@@ -1,6 +1,5 @@
 package hello.mong.repository.member;
 
-import static hello.mong.domain.entity.QAuthority.*;
 import static hello.mong.domain.entity.QMember.member;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -29,8 +28,6 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
     public Optional<Member> findByEmail(String email) {
 
         return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
-                .leftJoin(member.roles, authority)
-                .fetchJoin()
                 .where(member.email.eq(email))
                 .fetchOne());
 

@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +35,8 @@ public class Member extends BaseTimeEntity {
     private String password;
     private String phone;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Authority> roles = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -41,7 +44,6 @@ public class Member extends BaseTimeEntity {
 
     public void setRoles(Set<Authority> roles) {
         this.roles = roles;
-        roles.forEach(o -> o.setMember(this));
     }
 
     public void setShops(Shop shop) {

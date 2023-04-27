@@ -56,11 +56,11 @@ public class DeliveryService {
 
         Set<Authority> roles = member.getRoles();
 
-        if (roles.contains(Authority.builder().name("ROLE_DELIVERY").build())) {
+        if (roles.contains(Authority.ROLE_DELIVERY)) {
             throw new RuntimeException("이미 등록된 배송기사 입니다.");
         }
 
-        roles.add(Authority.builder().name("ROLE_DELIVERY").build());
+        roles.add(Authority.ROLE_DELIVERY);
 
         member.setRoles(roles);
 
