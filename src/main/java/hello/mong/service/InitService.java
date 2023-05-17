@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class InitService {
 
+    // Outh 로그인 추가하기
+
     private final MemberService memberService;
     private final DeliveryService deliveryService;
     private final ShopService shopService;
@@ -69,6 +71,7 @@ public class InitService {
 
         Set<Authority> roles = new HashSet<>();
 
+        roles.add(Authority.ROLE_USER);
         roles.add(Authority.ROLE_ADMIN);
         roles.add(Authority.ROLE_DELIVERY);
 
